@@ -4,9 +4,11 @@
   "private": true,
   "dependencies": {
     "axios": "^0.16.1",
+    "body-parser": "^1.17.1",
     "express": "^4.15.2",
     "mongojs": "^2.4.0",
     "mongoose": "^4.9.6",
+    "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",

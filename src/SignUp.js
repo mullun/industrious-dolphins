@@ -78,6 +78,8 @@ class SignUp extends Component {
   submitUserDetails() {
 
     console.log("Submit button clicked to sign up");
+    console.log("email = " + this.state.emailRecd);
+    console.log("zip = " + this.state.zipRecd);
 
     axios.post('/submitUser', {
         email: this.state.emailRecd,
