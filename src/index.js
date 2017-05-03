@@ -7,7 +7,7 @@ import {
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import App from './App';
-import Home from './Home';
+import Landing from './Landing';
 import './index.css';
 
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -16,9 +16,9 @@ const history = createBrowserHistory();
 ReactDOM.render(
 
   <Router>
-    <div className="contaniner">
+    <div className="container">
 			<nav className="navbar navbar-default">
-			  <div className="contaniner-fluid">
+			  <div className="container-fluid">
 			    <div className="navbar-header">
 			      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 			        <span className="sr-only">Toggle navigation</span>
@@ -42,7 +42,12 @@ ReactDOM.render(
 			  </div>
 			</nav>
       <Route exact path="/" component={App}> ></Route>
-      <Route path="/submitUser" component={SignUp} history={history} ></Route>
+      <Route path="/mytools" component={Mine} history={history}></Route>
+      <Route path="/mytools" component={Add} history={history}></Route>
+      <Route path="/mytools" component={Borrow} history={history}></Route>
+      <Route path="/mytools" component={Return} history={history}></Route>
+      <Route path="/mytools" component={Replace} history={history}></Route>
+	  <Route path="/submitUser" component={SignUp} history={history} ></Route>
     </div>
   </Router>
 
