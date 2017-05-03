@@ -37,8 +37,17 @@ ReactDOM.render(
 			    </div>
 			  </div>
 			</nav>
+
+	 	{/*route for home  page button */}
       <Route exact path="/" component={App}> ></Route>
+
       <Route path="/submitUser" component={SignUp} history={history} ></Route>
+
+      	{/*route for addtool page button */}
+      <Route path="/addtool" component={Home} history={history} ></Route>
+
+  		{/*route for borrow page  */}
+      <Route path="/borrow" component={borrow} history={history} ></Route>
     </div>
   </Router>
 
