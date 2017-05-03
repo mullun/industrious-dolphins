@@ -16,6 +16,13 @@
   text-align: right;
 }
 
+.signUpTexts {
+  width: 55%;
+  margin-right: 1%;
+  align-self: center;
+  text-align: right;
+}
+
 .buttonColumn {
 width:55%;
 float: right;

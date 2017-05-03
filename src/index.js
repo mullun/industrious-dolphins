@@ -5,9 +5,17 @@ import {
 	NavLink
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+
 import SignUp from './SignUp';
 import App from './App';
 import Home from './Home';
+import AddTool from "./AddTool";
+import MyTools from "./MyTools";
+import BorrowTool from "./BorrowTool";
+import SignUpPossible from ".SignUpPossible";
+import BorrowModal from "./BorrowModal";
+import AddToolModal from "./AddToolModal";
+
 import './index.css';
 
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -31,7 +39,11 @@ ReactDOM.render(
 			    <div id="navbar" className="navbar-collapse collapse">
 			      <ul className="nav navbar-nav">
 			        <li><NavLink exact activeClassName="activeNav" to="/">Home</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/mytools">My Tools</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/addtool">Add a Tool</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/borrowtool">Borrow a Tool</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/returntool">Return a Tool</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/replacetool">Replace a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/submitUser">Sign Up</NavLink></li>
 			      </ul>
 			    </div>
@@ -43,11 +55,9 @@ ReactDOM.render(
 
       <Route path="/submitUser" component={SignUp} history={history} ></Route>
 
-      	{/*route for addtool page button */}
-      <Route path="/addtool" component={Home} history={history} ></Route>
+      <Route path="/addtool" component={AddTool}></Route>
+      
 
-  		{/*route for borrow page  */}
-      <Route path="/borrow" component={borrow} history={history} ></Route>
     </div>
   </Router>
 
