@@ -7,6 +7,7 @@ import {
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
 import App from './App';
+import Home from './Home';
 import './index.css';
 
 import createBrowserHistory from 'history/createBrowserHistory';
