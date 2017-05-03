@@ -5,9 +5,17 @@ import {
 	NavLink
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
+
 import SignUp from './SignUp';
 import App from './App';
 import Home from './Home';
+import AddTool from "./AddTool";
+import MyTools from "./MyTools";
+import BorrowTool from "./BorrowTool";
+import SignUpPossible from ".SignUpPossible";
+import BorrowModal from "./BorrowModal";
+import AddToolModal from "./AddToolModal";
+
 import './index.css';
 
 import createBrowserHistory from 'history/createBrowserHistory';
@@ -39,6 +47,8 @@ ReactDOM.render(
 			</nav>
       <Route exact path="/" component={App}> ></Route>
       <Route path="/submitUser" component={SignUp} history={history} ></Route>
+      <Route path="/addtool" component={AddTool}></Route>
+      
     </div>
   </Router>
 
