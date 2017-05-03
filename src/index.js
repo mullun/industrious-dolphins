@@ -49,10 +49,15 @@ ReactDOM.render(
 			    </div>
 			  </div>
 			</nav>
+
+	 	{/*route for home  page button */}
       <Route exact path="/" component={App}> ></Route>
+
       <Route path="/submitUser" component={SignUp} history={history} ></Route>
+
       <Route path="/addtool" component={AddTool}></Route>
       
+
     </div>
   </Router>
 
