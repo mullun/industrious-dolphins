@@ -13,7 +13,6 @@ import Home from './Home';
 import AddTool from "./AddTool";
 import MyTools from "./MyTools";
 import BorrowTool from "./BorrowTool";
-import SignUpPossible from ".SignUpPossible";
 import BorrowModal from "./BorrowModal";
 import AddToolModal from "./AddToolModal";
 
