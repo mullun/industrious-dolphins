@@ -81,7 +81,7 @@ class SignUp extends Component {
     console.log("email = " + this.state.emailRecd);
     console.log("zip = " + this.state.zipRecd);
 
-    axios.post('/submitUser', {
+    return axios.post("/submitUser", {
         email: this.state.emailRecd,
         password: this.state.passwordRecd,
         confirmPassword: this.state.confirmPasswordRecd,
@@ -116,7 +116,7 @@ class SignUp extends Component {
     return (
       <div className="SignUp">
         <br/><br/>
-        <fieldset>
+        <fieldset className="signUpTexts">
           <legend> Enter your details </legend>
           <input value={emailEntered} onChange={this.handleEmailChange} placeholder="e-mail" />
           <br/><br/>
