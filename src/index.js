@@ -14,7 +14,7 @@ import Home from './Home';
 // import MyTools from "./MyTools";
 // import BorrowTool from "./BorrowTool";
 // import BorrowModal from "./BorrowModal";
-// import AddToolModal from "./AddToolModal";
+// import AddToolModal from "./AddToolModal"; 
 
 import './index.css';
 
@@ -53,7 +53,7 @@ ReactDOM.render(
 			<Switch>
 	      <Route exact path="/" component={App}> ></Route>
 	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
-        {/* <Route path="/addtool" component={AddTool}></Route> */}
+        { /* removed <Route path="/addtool" component={AddTool}></Route> */}
  			</Switch>
 
     </div>
