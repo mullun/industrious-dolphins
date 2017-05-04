@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
-	NavLink
+	NavLink,
+	Switch
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 
@@ -50,13 +51,11 @@ ReactDOM.render(
 			  </div>
 			</nav>
 
-	 	{/*route for home  page button */}
-      <Route exact path="/" component={App}> ></Route>
-
-      <Route path="/submitUser" component={SignUp} history={history} ></Route>
-
-      <Route path="/addtool" component={AddTool}></Route>
-      
+			<Switch>
+	      <Route exact path="/" component={App}> ></Route>
+	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
+        <Route path="/addtool" component={AddTool}></Route>
+ 			</Switch>
 
     </div>
   </Router>
