@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	BrowserRouter as Router,
 	Route,
-	NavLink
+	NavLink,
+	Switch
 } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import SignUp from './SignUp';
@@ -37,8 +38,10 @@ ReactDOM.render(
 			    </div>
 			  </div>
 			</nav>
-      <Route exact path="/" component={App}> ></Route>
-      <Route path="/submitUser" component={SignUp} history={history} ></Route>
+			<Switch>
+	      <Route exact path="/" component={App}> ></Route>
+	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
+ 			</Switch>
     </div>
   </Router>
 
