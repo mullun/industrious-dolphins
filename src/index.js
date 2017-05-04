@@ -11,11 +11,13 @@ import SignUp from './SignUp';
 import App from './App';
 import Home from './Home';
 
-// import AddTool from "./AddTool";
-// import MyTools from "./MyTools";
-// import BorrowTool from "./BorrowTool";
-// import BorrowModal from "./BorrowModal";
-// import AddToolModal from "./AddToolModal"; 
+import AddTool from "./AddTool";
+import MyTools from "./MyTools";
+import BorrowTool from "./BorrowTool";
+import ReturnTool from "./ReturnTool";
+import ReplaceTool from "./ReplaceTool";
+import BorrowModal from "./BorrowModal";
+import AddToolModal from "./AddToolModal"; 
 
 
 import './index.css';
@@ -55,7 +57,11 @@ ReactDOM.render(
 			<Switch>
 	      <Route exact path="/" component={App}> ></Route>
 	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
-        { /* removed <Route path="/addtool" component={AddTool}></Route> */}
+        <Route path="/addtool" component={AddTool}></Route>
+        <Route path="/borrowtool" component={BorrowTool}></Route>
+        <Route path="/mytools" component={MyTools}></Route>
+        <Route path="/returntool" component={ReturnTool}></Route>
+        <Route path="/replacetool" component={ReplaceTool}></Route>
  			</Switch>
 
     </div>
