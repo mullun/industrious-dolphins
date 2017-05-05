@@ -73,7 +73,9 @@ class AddTool extends Component {
 				<form>
 
 				</form>
-			</div>
+
+			</div>	
+
 		);
 	}
 }
