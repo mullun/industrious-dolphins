@@ -17,26 +17,7 @@ var UserSchema = new Schema({
   lastName: {
     type: String
   },
-  addressOne: {
-    type: String
-  },
-  addressTwo: {
-    type: String
-  },
-  city: {
-    type: String
-  },
-  state: {
-    type: String
-  },
-  zip: {
-    type: String
-  },
-  date: {
-    // 
-    type: Date
-  },
-  tools_owned: [{
+    tools_owned: [{
     type: Schema.Types.ObjectId,
     ref: "Tool"
   }], 
