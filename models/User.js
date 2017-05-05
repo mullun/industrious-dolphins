@@ -33,15 +33,16 @@ var UserSchema = new Schema({
     type: String
   },
   date: {
+    // 
     type: Date
   },
-  tool_id: {
-    type: Schema.ObjectId,
-    ref: "tools"
-  }, 
+  tools_owned: [{
+    type: Schema.Types.ObjectId,
+    ref: "Tool"
+  }], 
   group_id: {
-    type: Schema.ObjectId,
-    ref: "tools"
+    type: String
+    // use Group ID from the Group table
   }
 });
 

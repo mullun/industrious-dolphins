@@ -10,9 +10,9 @@ var GroupSchema = new Schema({
 	group_name: {
 		type : String		
 	},
-	user_id: {
-		type: Schema.ObjectId,
-		ref: "user"
+	users: [{
+		type: Schema.Types.ObjectId,
+		ref: "User"
 	}
 });
 
