@@ -18,6 +18,8 @@ import ReturnTool from "./ReturnTool";
 import ReplaceTool from "./ReplaceTool";
 import BorrowModal from "./BorrowModal";
 import AddToolModal from "./AddToolModal"; 
+import Available from "./Available";
+import Unavailable from "./Unavailable";
 
 
 import './index.css';
@@ -55,13 +57,16 @@ ReactDOM.render(
 			</nav>
 
 			<Switch>
-	      <Route exact path="/" component={App}> ></Route>
-	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
-        <Route path="/addtool" component={AddTool}></Route>
-        <Route path="/borrowtool" component={BorrowTool}></Route>
-        <Route path="/mytools" component={MyTools}></Route>
-        <Route path="/returntool" component={ReturnTool}></Route>
-        <Route path="/replacetool" component={ReplaceTool}></Route>
+	      		<Route exact path="/" component={App}> ></Route>
+	      		<Route path="/submitUser" component={SignUp} history={history} ></Route>
+        		<Route path="/addtool" component={AddTool}></Route>
+    		    <Route path="/borrowtool" component={BorrowTool}>
+    		    	<Route path="/borrowtool/available" component={Available}></Route>
+    		    	<Route path="/borrowtool/unavailable" component={Unavailable}></Route>
+    		    </Route>
+        		<Route path="/mytools" component={MyTools}></Route>
+    		    <Route path="/returntool" component={ReturnTool}></Route>
+    		    <Route path="/replacetool" component={ReplaceTool}></Route>
  			</Switch>
 
     </div>
