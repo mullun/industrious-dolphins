@@ -7,6 +7,11 @@ class MyTools extends Component {
 		return(
 			<div className="MyTools">
 				<h2>MyTools Page</h2>
+				<img src="http://placekitten.com/169/147" alt="User" id="UserPhoto">
+					<div className="UserAddress">
+					
+					</div>
+
 			</div>
 			);
 	}
