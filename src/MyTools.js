@@ -16,7 +16,7 @@ class MyTools extends Component {
 						</div>
 						<div className="UsersTools">
 
-
+						</div>
 			</div>
 			);
 	}

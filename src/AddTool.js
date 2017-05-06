@@ -28,7 +28,7 @@ class AddTool extends Component {
 	handleSubmit(event) {
 		event.preventDefault;
 		//call addTool function
-		this.addTool(this.toolName, this.toolPrice, this.toolCondition, this.toolMaxDays, this.toolUrl);
+		this.addTool(this.state.toolName, this.state.toolPrice, this.state.toolCondition, this.state.toolMaxDays, this.state.toolUrl);
 		//Reset the state of the component
 		this.setState = {
 			toolName: "",
@@ -41,6 +41,7 @@ class AddTool extends Component {
 
 	handleName(event) {
 		this.setState({ toolName: event.target.value });
+		console.log(this.state.toolName);
 	}
 
 	handlePrice(event) {
@@ -60,6 +61,8 @@ class AddTool extends Component {
 	}
 
 	addTool(name, price, condition, max, url) {
+		console.log("addTool in component ran");
+		console.log(name, price, condition);
 		axios.post("/submitTool", {
 			toolName: name,
 			toolPrice: price,
