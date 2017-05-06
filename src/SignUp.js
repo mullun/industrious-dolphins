@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import './SignUp.css';
 import axios from "axios";
-
-var script = document.createElement('script');
-script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
-script.type = 'text/javascript';
+import $ from "jquery";
 
 
 class SignUp extends Component {
-
-  constructor(props) {
+  constructor (props) {
     super(props);
 
     this.state = { 
@@ -18,7 +14,8 @@ class SignUp extends Component {
       confirmPasswordRecd: '',
       firstNameRecd: '',
       lastNameRecd: '',
-      groupNameRecd: ''
+      groupNameRecd: '',
+      arrayOfGroups: []
     };
 
     this.submitUserDetails = this.submitUserDetails.bind(this);
@@ -29,6 +26,26 @@ class SignUp extends Component {
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
     this.handleGroupNameChange = this.handleGroupNameChange.bind(this);
   }
+
+  // componentDidMount(){
+  //   // get list of group names in the database to show the user to choose
+  //   console.log("Component Did Mount");
+  //   return axios.get("/getGroups", {
+  //     })
+  //     .then(function (response) {
+  //       console.log("Groups in the Database");
+  //       var newArray = this.state.arrayOfGroups.slice();
+  //       for (var i=0; i < response.data.length; i++){
+  //           console.log(response.data[i].groupName);
+  //           console.log("\n");
+  //           newArray.push(response.data[i].groupName);   
+  //       }
+  //       this.setState({ arrayOfGroups:newArray });
+  //     })
+  //     .catch(function (error) {
+  //       console.log("error", error);
+  //     });
+  // }
 
   handleEmailChange(e) {
     this.setState({ emailRecd: e.target.value });
@@ -54,6 +71,7 @@ class SignUp extends Component {
     this.setState({ groupNameRecd: e.target.value });
     console.log(" Group Name entered");
   }
+
   submitUserDetails() {
 
     console.log("Submit button clicked to sign up");
@@ -76,7 +94,7 @@ class SignUp extends Component {
       });
   }
 
-  render() {
+  render () {
     var emailEntered;
     var passwordEntered;
     var confirmPasswordEntered;
@@ -86,7 +104,7 @@ class SignUp extends Component {
 
     return (
       <div className="SignUp">
-      <h2> Sign up to Share Tools!</h2>
+        <h2> Sign up to Share Tools!</h2>
         <br/><br/>
         <fieldset className="signUpTexts">
           <legend> Please enter your details </legend>
@@ -101,14 +119,13 @@ class SignUp extends Component {
           <input value={lastNameEntered} onChange={this.handleLastNameChange} placeholder="last name" />
           <br/><br/>
           <input value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Group Name" />
-          <br/><br/>
         </fieldset>
         <br/>
         <div className="col-sm-06 buttonColumn">
           <button className="buttonClass" onClick={this.submitUserDetails}>Submit</button>
         </div>
       </div>
-    );
+    )
   }
 }
 
