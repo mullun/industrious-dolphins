@@ -149,6 +149,17 @@ app.post("/submitTool", function(req, res){
 
 });
 
+app.get("/getTools", function(req, res){
+  Tool.find({}).exec(function(err, doc){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+      res.send(doc);
+    }
+  });
+});
+
 // -------------------------------------------------
 // Listener
 app.listen(PORT, function() {
