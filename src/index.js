@@ -18,6 +18,7 @@ import ReturnTool from "./ReturnTool";
 import ReplaceTool from "./ReplaceTool";
 import BorrowModal from "./BorrowModal";
 import AddToolModal from "./AddToolModal"; 
+import CreateGroup from "./CreateGroup";
 
 
 import './index.css';
@@ -49,6 +50,7 @@ ReactDOM.render(
 			        <li><NavLink activeClassName="activeNav" to="/returntool">Return a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/replacetool">Replace a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/submitUser">Sign Up</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/createGroup">Create Group</NavLink></li>
 			      </ul>
 			    </div>
 			  </div>
@@ -62,6 +64,7 @@ ReactDOM.render(
         <Route path="/mytools" component={MyTools}></Route>
         <Route path="/returntool" component={ReturnTool}></Route>
         <Route path="/replacetool" component={ReplaceTool}></Route>
+        <Route path="/createGroup" component={CreateGroup}></Route>
  			</Switch>
 
     </div>

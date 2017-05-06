@@ -6,6 +6,7 @@ var mongoose = require("mongoose");
 
 // Require User Schema
 var User = require('./models/User.js');
+var Group = require('./models/Group.js');
 
 // Create Instance of Express
 var app = express();
@@ -73,11 +74,7 @@ app.post("/submitUser", function(req, res) {
     confirmPassword: req.body.confirmPassword,
     firstName:req.body.firstName,
     lastName:req.body.lastName,
-    addressOne: req.body.addressOne,
-    addressTwo: req.body.addressTwo,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zip,
+    groupId:"3", // dummy data
     date: Date.now()
   }, function(err) {
     if (err) {
@@ -90,7 +87,26 @@ app.post("/submitUser", function(req, res) {
 });
 
 // -------------------------------------------------
+// This is the route we will send POST requests to save a group name to db.
+app.post("/createGroup", function(req, res) {
+  console.log("BODY: " + req.body);
 
+  // Here we'll save the group name based on the JSON input.
+  // We'll use Date.now() to always get the current date time
+  Group.create({
+    groupName: req.body.groupName,
+    date: Date.now()
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Saved Group Name");
+    }
+  });
+});
+
+// -------------------------------------------------
 // Listener
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);

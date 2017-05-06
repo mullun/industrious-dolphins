@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import './SignUp.css';
 import axios from "axios";
 
+var script = document.createElement('script');
+script.src = 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js';
+script.type = 'text/javascript';
 
 
 class SignUp extends Component {
@@ -15,11 +18,7 @@ class SignUp extends Component {
       confirmPasswordRecd: '',
       firstNameRecd: '',
       lastNameRecd: '',
-      addressOneRecd: '',
-      addressTwoRecd: '',
-      cityRecd: '',
-      stateRecd: '',
-      zipRecd: ''
+      groupNameRecd: ''
     };
 
     this.submitUserDetails = this.submitUserDetails.bind(this);
@@ -28,11 +27,7 @@ class SignUp extends Component {
     this.handleConfirmPasswordChange = this.handleConfirmPasswordChange.bind(this);  
     this.handleFirstNameChange = this.handleFirstNameChange.bind(this);
     this.handleLastNameChange = this.handleLastNameChange.bind(this);
-    this.handleAddressOneChange = this.handleAddressOneChange.bind(this);
-    this.handleAddressTwoChange = this.handleAddressTwoChange.bind(this);
-    this.handleCityChange = this.handleCityChange.bind(this);
-    this.handleStateChange = this.handleStateChange.bind(this);
-    this.handleZipChange = this.handleZipChange.bind(this);
+    this.handleGroupNameChange = this.handleGroupNameChange.bind(this);
   }
 
   handleEmailChange(e) {
@@ -55,31 +50,15 @@ class SignUp extends Component {
     this.setState({ lastNameRecd: e.target.value });
     console.log("last Name entered");
   }
-  handleAddressOneChange(e) {
-    this.setState({ addressOneRecd: e.target.value });
-    console.log(" address One entered");
-  }
-  handleAddressTwoChange(e) {
-    this.setState({ addressTwoRecd: e.target.value });
-    console.log("address Two entered");
-  }
-  handleCityChange(e) {
-    this.setState({ cityRecd: e.target.value });
-    console.log("city entered");
-  }
-  handleStateChange(e) {
-    this.setState({ stateRecd: e.target.value });
-    console.log("state entered");
-  }
-  handleZipChange(e) {
-    this.setState({ zipRecd: e.target.value });
-    console.log("zip entered");
+  handleGroupNameChange(e) {
+    this.setState({ groupNameRecd: e.target.value });
+    console.log(" Group Name entered");
   }
   submitUserDetails() {
 
     console.log("Submit button clicked to sign up");
     console.log("email = " + this.state.emailRecd);
-    console.log("zip = " + this.state.zipRecd);
+    console.log("Group Name = " + this.state.groupNameRecd);
 
     return axios.post("/submitUser", {
         email: this.state.emailRecd,
@@ -87,11 +66,7 @@ class SignUp extends Component {
         confirmPassword: this.state.confirmPasswordRecd,
         firstName:this.state.firstNameRecd,
         lastName:this.state.lastNameRecd,
-        addressOne: this.state.addressOneRecd,
-        addressTwo: this.state.addressTwoRecd,
-        city: this.state.cityRecd,
-        state: this.state.stateRecd,
-        zip: this.state.zipRecd
+        groupName: this.state.groupNameRecd
       })
       .then(function (response) {
         console.log(response);
@@ -107,17 +82,14 @@ class SignUp extends Component {
     var confirmPasswordEntered;
     var firstNameEntered;
     var lastNameEntered;
-    var addressOneEntered;
-    var addressTwoEntered;
-    var cityEntered;
-    var stateEntered;
-    var zipEntered;
+    var groupNameEntered;
 
     return (
       <div className="SignUp">
+      <h2> Sign up to Share Tools!</h2>
         <br/><br/>
         <fieldset className="signUpTexts">
-          <legend> Enter your details </legend>
+          <legend> Please enter your details </legend>
           <input value={emailEntered} onChange={this.handleEmailChange} placeholder="e-mail" />
           <br/><br/>
           <input value={passwordEntered} onChange={this.handlePasswordChange} type="password" placeholder="password" />
@@ -128,15 +100,8 @@ class SignUp extends Component {
           <br/><br/>
           <input value={lastNameEntered} onChange={this.handleLastNameChange} placeholder="last name" />
           <br/><br/>
-          <input value={addressOneEntered} onChange={this.handleAddressOneChange} placeholder="address1" />
+          <input value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Group Name" />
           <br/><br/>
-          <input value={addressTwoEntered} onChange={this.handleAddressTwoChange} placeholder="address2" />
-          <br/><br/>
-          <input value={cityEntered} onChange={this.handleCityChange} placeholder="city" />
-          <br/><br/>
-          <input value={stateEntered} onChange={this.handleStateChange} placeholder="state" />
-          <br/><br/>
-          <input value={zipEntered} onChange={this.handleZipChange} placeholder="zip" />
         </fieldset>
         <br/>
         <div className="col-sm-06 buttonColumn">
