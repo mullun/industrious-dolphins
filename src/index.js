@@ -28,8 +28,8 @@ import Unavailable from "./Unavailable";
 
 import './index.css';
 
-import createBrowserHistory from 'history/createBrowserHistory';
-const history = createBrowserHistory();
+//import createBrowserHistory from 'history/createBrowserHistory';
+//const history = createBrowserHistory();
 
 ReactDOM.render(
 
