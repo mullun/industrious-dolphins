@@ -107,6 +107,21 @@ app.post("/createGroup", function(req, res) {
 });
 
 // -------------------------------------------------
+// This is the route we will send GET list of groups in the Data Base.
+app.get("/getGroups", function(req, res) {
+  console.log("got into getGroups GET in Server");
+  // We'll use Date.now() to always get the current date time
+  Group.find({}, function(err, groups) {
+    if (err) {
+      res.json(err);
+    }
+    else {
+      res.json(groups);
+    }
+  });
+});
+
+// -------------------------------------------------
 // Listener
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
