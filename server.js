@@ -8,6 +8,9 @@ var mongoose = require("mongoose");
 var User = require('./models/User.js');
 var Group = require('./models/Group.js');
 
+//Require Tool Schema
+var Tool = require('./models/Tool.js');
+
 // Create Instance of Express
 var app = express();
 // Sets an initial port. We'll use this later in our listener
@@ -117,6 +120,33 @@ app.post("/createGroup", function(req, res) {
       res.send("Saved Group Name");
     }
   });
+});
+
+//Add tool to database
+app.post("/submitTool", function(req, res){
+  console.log("addTool BODY: ");
+  console.log(req.body);
+
+  var user = 111111111;
+
+  Tool.create({
+    toolName: req.body.toolName,
+    toolPrice: req.body.toolPrice,
+    toolCondition: req.body.toolCondition,
+    toolStatus: true,
+    toolHeldBy: user,
+    toolMaxDays: req.body.toolMaxDays,
+    toolUrl: req.body.toolUrl,
+    toolOwner: user,
+    toolCreateDate: Date.now()
+  }, function(err){
+    if(err) {
+      console.log(err);
+    } else {
+      res.send("Saved Tool")
+    }
+  })
+
 });
 
 // -------------------------------------------------
