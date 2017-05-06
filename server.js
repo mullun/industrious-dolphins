@@ -8,6 +8,9 @@ var mongoose = require("mongoose");
 var User = require('./models/User.js');
 var Group = require('./models/Group.js');
 
+//Require Tool Schema
+var Tool = require('./models/Tool.js');
+
 // Create Instance of Express
 var app = express();
 // Sets an initial port. We'll use this later in our listener
@@ -62,6 +65,19 @@ app.get("/api", function(req, res) {
   // });
 });
 
+app.get("/mytools", function(req, res){
+ console.log("Information: ", req.body);
+ User.find({"email": req.body.email}).exec(function(err, doc){
+    if (err) {
+      console.log(err);
+
+    } else {
+      res.send(doc);
+    }
+ });
+
+});
+
 // This is the route we will send POST requests to save user data to db.
 app.post("/submitUser", function(req, res) {
   console.log("BODY: " + req.body);
@@ -102,6 +118,44 @@ app.post("/createGroup", function(req, res) {
     }
     else {
       res.send("Saved Group Name");
+    }
+  });
+});
+
+//Add tool to database
+app.post("/submitTool", function(req, res){
+  console.log("addTool BODY: ");
+  console.log(req.body);
+
+  var user = 111111111;
+
+  Tool.create({
+    toolName: req.body.toolName,
+    toolPrice: req.body.toolPrice,
+    toolCondition: req.body.toolCondition,
+    toolStatus: true,
+    toolHeldBy: user,
+    toolMaxDays: req.body.toolMaxDays,
+    toolUrl: req.body.toolUrl,
+    toolOwner: user,
+    toolCreateDate: Date.now()
+  }, function(err){
+    if(err) {
+      console.log(err);
+    } else {
+      res.send("Saved Tool")
+    }
+  })
+
+});
+
+app.get("/getTools", function(req, res){
+  Tool.find({}).exec(function(err, doc){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+      res.send(doc);
     }
   });
 });

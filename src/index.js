@@ -18,13 +18,18 @@ import ReturnTool from "./ReturnTool";
 import ReplaceTool from "./ReplaceTool";
 import BorrowModal from "./BorrowModal";
 import AddToolModal from "./AddToolModal"; 
+
 import CreateGroup from "./CreateGroup";
+
+import Available from "./Available";
+import Unavailable from "./Unavailable";
+
 
 
 import './index.css';
 
-import createBrowserHistory from 'history/createBrowserHistory';
-const history = createBrowserHistory();
+//import createBrowserHistory from 'history/createBrowserHistory';
+//const history = createBrowserHistory();
 
 ReactDOM.render(
 
@@ -57,6 +62,7 @@ ReactDOM.render(
 			</nav>
 
 			<Switch>
+
 	      <Route exact path="/" component={App}> ></Route>
 	      <Route path="/submitUser" component={SignUp} history={history} ></Route>
         <Route path="/addtool" component={AddTool}></Route>
@@ -65,6 +71,7 @@ ReactDOM.render(
         <Route path="/returntool" component={ReturnTool}></Route>
         <Route path="/replacetool" component={ReplaceTool}></Route>
         <Route path="/createGroup" component={CreateGroup}></Route>
+
  			</Switch>
 
     </div>
