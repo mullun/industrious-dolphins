@@ -17,13 +17,22 @@ var UserSchema = new Schema({
   lastName: {
     type: String
   },
-    tools_owned: [{
+
+  date: {
+    // 
+    type: Date
+  },
+  toolsOwned: [{
+
     type: Schema.Types.ObjectId,
     ref: "Tool"
   }], 
-  group_id: {
+  groupId: {
     type: String
     // use Group ID from the Group table
+  },
+  userCreatedDate: {
+    type:Date
   }
 });
 

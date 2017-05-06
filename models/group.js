@@ -4,16 +4,20 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Create group schema
-var GroupSchema = new Schema({
+var GroupSchema = new Schema ({
 	 
 	// Group is requiring string
-	group_name: {
+	groupName: {
 		type : String		
+	},
+	groupCreatedDate: {
+		type:Date
 	},
 	users: [{
 		type: Schema.Types.ObjectId,
 		ref: "User"
-	}
+	}]
+
 });
 
 // Create group model with the GroupSchema
