@@ -2,29 +2,23 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "./AddTool";
 import "./MyTools.css";
-import "../utils/helpers.js";
 
 class MyTools extends Component {
 
 	componentDidMount(){
-		helpers.getMyToolsUser()
+		return axios.get("/mytools")
 		.then(function(response){
-			var userID = response.
-		})
+			console.log(response);
+		var userEmail = response.data.email;
+			console.log(userEmail);
+		});
 
 	}
 
 	render(){
 		return(
 			<div className="MyTools">
-					<h2>MyTools Page</h2>
-						<div className="UserAddress">
-							{this.props.useraddress}
-						</div>
-						<div className="UsersTools">
-
-						</div>
-
+					<h2>MyTools Page</h2>		
 			</div>
 			);
 	}
