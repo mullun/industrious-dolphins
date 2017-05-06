@@ -65,6 +65,19 @@ app.get("/api", function(req, res) {
   // });
 });
 
+app.get("/mytools", function(req, res){
+ console.log("Information: " + req.body);
+ User.find({}).exec(function(err, doc){
+    if (err) {
+      console.log(err);
+
+    } else {
+      res.send(doc);
+    }
+ });
+
+});
+
 // This is the route we will send POST requests to save user data to db.
 app.post("/submitUser", function(req, res) {
   console.log("BODY: " + req.body);

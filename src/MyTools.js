@@ -4,9 +4,7 @@ import "./AddTool";
 import "./MyTools.css";
 
 class MyTools extends Component {
-	ComponentDidMount(){
 
-	}
 	render(){
 		return(
 			<div className="MyTools">
@@ -17,6 +15,7 @@ class MyTools extends Component {
 						<div className="UsersTools">
 
 						</div>
+
 			</div>
 			);
 	}
