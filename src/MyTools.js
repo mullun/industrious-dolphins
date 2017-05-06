@@ -4,9 +4,7 @@ import "./AddTool";
 import "./MyTools.css";
 
 class MyTools extends Component {
-	ComponentDidMount(){
 
-	}
 	render(){
 		return(
 			<div className="MyTools">
@@ -15,7 +13,7 @@ class MyTools extends Component {
 							{this.props.useraddress}
 						</div>
 						<div className="UsersTools">
-
+						</div>
 
 			</div>
 			);
