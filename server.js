@@ -62,7 +62,7 @@ app.get("/api", function(req, res) {
   // });
 });
 
-app.get("/mytools", function(req. res){
+app.get("/mytools", function(req, res){
  console.log("Information: " + req.body);
  User.find({}).exec(function(err, doc){
     if (err) {
