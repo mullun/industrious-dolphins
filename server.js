@@ -3,6 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var passport = require("./src/config/passport")(passport)
 
 // Require User Schema
 var User = require('./models/User.js');
@@ -17,6 +18,9 @@ var app = express();
 var PORT = process.env.PORT || 8080;
 // var PORT = 8080;
 
+// ensure that public folder is the default for files
+app.use(express.static("./public"));
+
 // Run Morgan for Logging middleware
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -24,10 +28,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-// ensure that public folder is the default for files
-app.use(express.static("./public"));
-
 // -------------------------------------------------
+
+// Initialize Passport
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // MongoDB Configuration configuration
 mongoose.connect("mongodb://localhost/toolshare");
@@ -42,6 +48,7 @@ db.once("open", function() {
 });
 
 // -------------------------------------------------
+
 
 // Main "/" Route. This will redirect the user to our rendered React application
 app.get("/", function(req, res) {
@@ -101,6 +108,12 @@ app.post("/submitUser", function(req, res) {
     }
   });
 });
+
+// This is the route we will send POST requests for logging in.
+app.post("/checkLogin", passport.authenticate("local"), function(req, res) {
+  console.log("req.session.username" + req.session.username)
+})
+
 
 // -------------------------------------------------
 // This is the route we will send POST requests to save a group name to db.
