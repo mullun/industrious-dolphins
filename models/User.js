@@ -1,6 +1,6 @@
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-// var bcrypt = require("bcrypt");
+var bcrypt = require("bcrypt-nodejs");
 // const saltRounds = 10;
 
 var UserSchema = new Schema({
@@ -38,26 +38,30 @@ var UserSchema = new Schema({
   }
 });
 
-// UserSchema.pre("save", function(next) {
-//   const user = this;
+UserSchema.pre("save", function(next) {
+  const user = this;
 
-//   // runs only if pw is modified or user is new
-//   if (!user.isModified("password")) {
-//     return next();
-//   }
+  // runs only if pw is modified or user is new
+  if (!user.isModified("password")) {
+    return next();
+  }
 
-//   bcrypt.hash(user.password, salt, function(err, hash) {
-//     user.password = hash;
-//     console.log(user.password)
-//   })
-// });
+  bcrypt.hash(user.password, null, null, function(err, hash) {
+    if (err) {
+      next()
+    }
+    user.password = hash;
+    console.log("this is user.password inside User.js: " + user.password)
+    next();
+  })
+});
 
-// // Compare pw with value in db
-// UserSchema.methods.comparePassword = function(password, cb){
-//   bcrypt.compare(password, this.password, function(err, res) {
-//       if (err) return cb(err)
-//   });
-// }
+// Compare pw with value in db
+UserSchema.methods.comparePassword = function(password, cb){
+  bcrypt.compare(password, this.password, function(err, res) {
+      if (err) return cb(err)
+  });
+}
 
 // Create user model
 var User = mongoose.model("User", UserSchema);
