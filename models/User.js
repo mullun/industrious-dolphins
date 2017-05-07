@@ -50,10 +50,10 @@ UserSchema.pre("save", function(next) {
     user.password = hash;
     console.log(user.password)
   })
-})
+});
 
 // Compare pw with value in db
-UserSchema.methods.comparePassword = function(password, cb){}
+UserSchema.methods.comparePassword = function(password, cb){
   bcrypt.compare(password, this.password, function(err, res) {
       if (err) return cb(err)
   });
