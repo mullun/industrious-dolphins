@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
-import "./BorrowTool.css";
-import Available from "./Available";
-import Unavailable from "./Unavailable";
+import "./BorrowModal.css";
 
-class BorrowTool extends Component {
-	render(){
-		return(
-			<div className="BorrowTool">
-				<h2>BorrowTool Page</h2>
-				<Available />
-				<Unavailable />
-			</div>
-			);
-	}
+class BorrowModal extends Component {
+  render(){
+    return(
+      <div className="BorrowModal">
+        <h2>BorrowModal Page</h2>
+      </div>
+      );
+  }
 }
 
-export default BorrowTool;
+export default BorrowModal;

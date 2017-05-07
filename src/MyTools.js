@@ -24,9 +24,8 @@ class MyTools extends Component {
 						<div className="UsersTools">
 
 						</div>
-
 			</div>
-			);
+		);
 	}
 }
 
