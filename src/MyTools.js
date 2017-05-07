@@ -13,8 +13,6 @@ class MyTools extends Component {
 			console.log(userEmail);
 		});
 
-	}
-
 	render(){
 		return(
 		<div className = "container">
