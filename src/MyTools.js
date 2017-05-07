@@ -14,11 +14,9 @@ class MyTools extends Component {
 						<div className="UserAddress">
 							{this.props.useraddress}
 						</div>
-						<div className="UsersTools">
-
-
+						<div className="UsersTools"></div>
 			</div>
-			);
+		);
 	}
 }
 
