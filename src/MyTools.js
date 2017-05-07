@@ -2,11 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "./AddTool";
 import "./MyTools.css";
+// import "../utils/helpers.js";
 
 class MyTools extends Component {
-	ComponentDidMount(){
 
-	}
+	// componentDidMount(){
+	// 	helpers.getMyToolsUser()
+	// 	.then(function(response){
+	// 		var userID = response.
+	// 	})
+
+	// }
+
 	render(){
 		return(
 			<div className="MyTools">
@@ -14,7 +21,9 @@ class MyTools extends Component {
 						<div className="UserAddress">
 							{this.props.useraddress}
 						</div>
-						<div className="UsersTools"></div>
+						<div className="UsersTools">
+
+						</div>
 			</div>
 		);
 	}

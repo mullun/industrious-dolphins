@@ -4,32 +4,38 @@ var Schema = mongoose.Schema;
 // Create tools schema
 var ToolSchema = new Schema ({
 	
-	tool_name: {
+	toolName: {
 		type: String		
 	},
-	tool_price: {
+	toolPrice: {
 		type: Number		
 	},
-	tool_condition: {
+	toolCondition: {
 		// working condition - usable, not-usable
 		type: String		
 	},
-	tool_status: {
+	toolStatus: {
 		type:Boolean
 		// rented or available
 	},
-	tool_renter: {
+	toolHeldBy: {
 		// who has it rented currently
 		// use UserId from the other table
 		type:String
 	},
-	tool_max_days: {
+	toolMaxDays: {
 		// number of days for which it can be rented
 		type: Number		
 	}, 
-	tool_url: {
+	toolUrl: {
 		// url to a picture of the tool
 		type: String		
+	},
+	toolOwner: {
+		type: String
+	},
+	toolCreatedDate: {
+		type:Date
 	}
 });
 // Create tool model wth the ToolsShema

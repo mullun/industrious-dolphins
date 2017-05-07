@@ -9,11 +9,11 @@ class AddTool extends Component {
 		super(props);
 
 		this.state = {
-			tool_name: "",
-			tool_price: "",
-			tool_condition: "",
-			tool_max_days: "",
-			tool_url: ""
+			toolName: "",
+			toolPriceInput: "",
+			toolCondition: "",
+			toolMaxDays: "",
+			toolUrl: ""
 		};
 	
 		this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,44 +28,47 @@ class AddTool extends Component {
 	handleSubmit(event) {
 		event.preventDefault;
 		//call addTool function
-		this.addTool(this.tool_name, this.tool_price, this.tool_condition, this.tool_max_days, this.tool_url);
+		this.addTool(this.state.toolName, this.state.toolPrice, this.state.toolCondition, this.state.toolMaxDays, this.state.toolUrl);
 		//Reset the state of the component
 		this.setState = {
-			tool_name: "",
-			tool_price: "",
-			tool_condition: "",
-			tool_max_days: "",
-			tool_url: ""
+			toolName: "",
+			toolPrice: "",
+			toolCondition: "",
+			toolMaxDays: "",
+			toolUrl: ""
 		};		
 	}
 
 	handleName(event) {
-		this.setState({ tool_name: event.target.value });
+		this.setState({ toolName: event.target.value });
+		console.log(this.state.toolName);
 	}
 
 	handlePrice(event) {
-		this.setState({ tool_price: event.target.value });
+		this.setState({ toolPrice: event.target.value });
 	}
 
 	handleCondition(event) {
-		this.setState({ tool_condition: event.target.value });
+		this.setState({ toolCondition: event.target.value });
 	}
 
 	handleMaxDays(event) {
-		this.setState({ tool_max_days: event.target.value });
+		this.setState({ toolMaxDays: event.target.value });
 	}
 
 	handleUrl(event) {
-		this.setState({ tool_url: event.target.value });
+		this.setState({ toolUrl: event.target.value });
 	}
 
 	addTool(name, price, condition, max, url) {
+		console.log("addTool in component ran");
+		console.log(name, price, condition);
 		axios.post("/submitTool", {
-			tool_name: name,
-			tool_price: price,
-			tool_condition: condition,
-			tool_max_days: max,
-			tool_url: url
+			toolName: name,
+			toolPrice: price,
+			toolCondition: condition,
+			toolMaxDays: max,
+			toolUrl: url
 		})
 		.then(function(response){
 			console.log(response);
@@ -89,7 +92,7 @@ class AddTool extends Component {
 							id="toolNameInput"
 							onChange={this.handleName}
 							placeholder="Tool Name"
-							value={this.state.tool_name}
+							value={this.state.toolName}
 							required
 						/>
 						<label for="toolPriceInput">Cost To Replace</label>						
@@ -99,7 +102,7 @@ class AddTool extends Component {
 							id="toolPriceInput"
 							onChange={this.handlePrice}
 							placeholder="$$$"
-							value={this.state.tool_price}
+							value={this.state.toolPrice}
 							required
 						/>	
 						<label for="toolConditionInput">Tool Condition</label>						
@@ -109,7 +112,7 @@ class AddTool extends Component {
 							id="toolConditionInput"
 							onChange={this.handleCondition}
 							placeholder="Lightly used"
-							value={this.state.tool_condition}
+							value={this.state.toolCondition}
 							required
 						/>	
 						<label for="toolMaxInput">Max Days To Lend</label>						
@@ -119,7 +122,7 @@ class AddTool extends Component {
 							id="toolMaxInput"
 							onChange={this.handleMaxDays}
 							placeholder="7 days"
-							value={this.state.tool_max_days}
+							value={this.state.toolMaxDays}
 							required
 						/>
 						<label for="toolUrlInput">Image URL</label>						
@@ -129,7 +132,7 @@ class AddTool extends Component {
 							id="toolUrlInput"
 							onChange={this.handleUrl}
 							placeholder="$$$"
-							value={this.state.tool_url}
+							value={this.state.toolUrl}
 							required
 						/>	
 						<button className="btn">Submit</button>																								

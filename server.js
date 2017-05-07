@@ -6,6 +6,10 @@ var mongoose = require("mongoose");
 
 // Require User Schema
 var User = require('./models/User.js');
+var Group = require('./models/Group.js');
+
+//Require Tool Schema
+var Tool = require('./models/Tool.js');
 
 // Create Instance of Express
 var app = express();
@@ -61,6 +65,19 @@ app.get("/api", function(req, res) {
   // });
 });
 
+app.get("/mytools", function(req, res){
+ console.log("Information: ", req.body);
+ User.find({"email": req.body.email}).exec(function(err, doc){
+    if (err) {
+      console.log(err);
+
+    } else {
+      res.send(doc);
+    }
+ });
+
+});
+
 // This is the route we will send POST requests to save user data to db.
 app.post("/submitUser", function(req, res) {
   console.log("BODY: " + req.body);
@@ -73,11 +90,7 @@ app.post("/submitUser", function(req, res) {
     confirmPassword: req.body.confirmPassword,
     firstName:req.body.firstName,
     lastName:req.body.lastName,
-    addressOne: req.body.addressOne,
-    addressTwo: req.body.addressTwo,
-    city: req.body.city,
-    state: req.body.state,
-    zip: req.body.zip,
+    groupId:"3", // dummy data
     date: Date.now()
   }, function(err) {
     if (err) {
@@ -90,7 +103,79 @@ app.post("/submitUser", function(req, res) {
 });
 
 // -------------------------------------------------
+// This is the route we will send POST requests to save a group name to db.
+app.post("/createGroup", function(req, res) {
+  console.log("BODY: " + req.body);
 
+  // Here we'll save the group name based on the JSON input.
+  // We'll use Date.now() to always get the current date time
+  Group.create({
+    groupName: req.body.groupName,
+    date: Date.now()
+  }, function(err) {
+    if (err) {
+      console.log(err);
+    }
+    else {
+      res.send("Saved Group Name");
+    }
+  });
+});
+
+//Add tool to database
+app.post("/submitTool", function(req, res){
+  console.log("addTool BODY: ");
+  console.log(req.body);
+
+  var user = 111111111;
+
+  Tool.create({
+    toolName: req.body.toolName,
+    toolPrice: req.body.toolPrice,
+    toolCondition: req.body.toolCondition,
+    toolStatus: true,
+    toolHeldBy: user,
+    toolMaxDays: req.body.toolMaxDays,
+    toolUrl: req.body.toolUrl,
+    toolOwner: user,
+    toolCreateDate: Date.now()
+  }, function(err){
+    if(err) {
+      console.log(err);
+    } else {
+      res.send("Saved Tool")
+    }
+  })
+
+});
+
+app.get("/getTools", function(req, res){
+  Tool.find({}).exec(function(err, doc){
+    if(err){
+      console.log(err);
+    }else{
+      console.log(doc);
+      res.send(doc);
+    }
+  });
+});
+
+// -------------------------------------------------
+// This is the route we will send GET list of groups in the Data Base.
+app.get("/getGroups", function(req, res) {
+  console.log("got into getGroups GET in Server");
+  // We'll use Date.now() to always get the current date time
+  Group.find({}, function(err, groups) {
+    if (err) {
+      res.json(err);
+    }
+    else {
+      res.json(groups);
+    }
+  });
+});
+
+// -------------------------------------------------
 // Listener
 app.listen(PORT, function() {
   console.log("App listening on PORT: " + PORT);
