@@ -3,7 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var passport = require("./src/config/passport")(passport)
+var passport = require("./src/config/passport");
 
 // Require User Schema
 var User = require('./models/User.js');
@@ -31,7 +31,7 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // -------------------------------------------------
 
 // Initialize Passport
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
