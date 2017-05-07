@@ -5,26 +5,26 @@ import "./MyTools.css";
 
 class MyTools extends Component {
 
-	componentDidMount(){
-		return axios.get("/mytools")
-		.then(function(response){
-			console.log(response);
-			
-			console.log(userEmail);
-		});
+	// componentDidMount(){
+	// 	helpers.getMyToolsUser()
+	// 	.then(function(response){
+	// 		var userID = response.
+	// 	})
 
+	// }
 	render(){
 		return(
-		<div className = "container">
 			<div className="MyTools">
-					<h2>MyTools Page</h2>		
+					<h2>MyTools Page</h2>
+						<div className="UserAddress">
+							{this.props.useraddress}
+						</div>
+						<div className="UsersTools">
+
+						</div>
 			</div>
-			<div className = "UserInfo">
-			{this.}
-		</div>
-			);
+		);
 	}
 }
 
 export default MyTools;
-
