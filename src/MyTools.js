@@ -5,13 +5,16 @@ import "./MyTools.css";
 
 class MyTools extends Component {
 
-	// componentDidMount(){
-	// 	helpers.getMyToolsUser()
-	// 	.then(function(response){
-	// 		var userID = response.
-	// 	})
+ componentDidMount(){
+ 	return axios.get("/mytools")
+  		.then(function(response){
+  			console.log(response);
+  		var firstName = response.data[0].firstName;
+  			console.log(firstName);
+ 	})
 
-	// }
+
+ }
 	render(){
 		return(
 			<div className="MyTools">
