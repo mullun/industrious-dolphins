@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import React, { Component } from 'react';
 import axios from 'axios';
 import "./AddTool";
 import "./MyTools.css";
-// import "../utils/helpers.js";
 
 class MyTools extends Component {
 
@@ -14,7 +12,6 @@ class MyTools extends Component {
 	// 	})
 
 	// }
-
 	render(){
 		return(
 			<div className="MyTools">
