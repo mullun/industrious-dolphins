@@ -87,25 +87,42 @@ app.get("/mytools", function(req, res){
 // This is the route we will send POST requests to save user data to db.
 app.post("/submitUser", function(req, res) {
   console.log("BODY: " + req.body);
+  var groupIdReceived;
+
+  Group.find({
+    "groupName": req.body.groupName
+  }).exec( (err, group) => {
+    if(err){
+      console.log("error finding group");
+    }
+    else {
+      console.log("group[0]._id");
+      console.log(group);
+      console.log(group[0]._id);
+      groupIdReceived = group[0]._id;
+
+      User.create({
+          email: req.body.email,
+          password: req.body.password,
+          confirmPassword: req.body.confirmPassword,
+          firstName:req.body.firstName,
+          lastName:req.body.lastName,
+          groupId:groupIdReceived, // dummy data
+          userCreatedDate: Date.now()
+      }, function(err) {
+        if (err) {
+          console.log("error saving user ", err);
+        }
+        else {
+          res.send("Saved User");
+        }
+      });
+    }
+  })
 
   // Here we'll save the location based on the JSON input.
   // We'll use Date.now() to always get the current date time
-  User.create({
-    email: req.body.email,
-    password: req.body.password,
-    confirmPassword: req.body.confirmPassword,
-    firstName:req.body.firstName,
-    lastName:req.body.lastName,
-    groupId:"3", // dummy data
-    date: Date.now()
-  }, function(err) {
-    if (err) {
-      console.log(err);
-    }
-    else {
-      res.send("Saved User");
-    }
-  });
+  
 });
 
 // This is the route we will send POST requests for logging in.

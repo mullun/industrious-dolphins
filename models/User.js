@@ -24,11 +24,6 @@ var UserSchema = new Schema({
     type: String,
     required: true
   },
-
-  date: {
-    // 
-    type: Date
-  },
   toolsOwned: [{
 
     type: Schema.Types.ObjectId,
