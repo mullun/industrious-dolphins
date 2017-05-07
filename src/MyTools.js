@@ -9,7 +9,7 @@ class MyTools extends Component {
 		return axios.get("/mytools")
 		.then(function(response){
 			console.log(response);
-		var userEmail = response.data.email;
+			
 			console.log(userEmail);
 		});
 
@@ -17,9 +17,13 @@ class MyTools extends Component {
 
 	render(){
 		return(
+		<div className = "container">
 			<div className="MyTools">
 					<h2>MyTools Page</h2>		
 			</div>
+			<div className = "UserInfo">
+			{this.}
+		</div>
 			);
 	}
 }
