@@ -9,19 +9,16 @@ class MyTools extends Component {
  	return axios.get("/mytools")
   		.then(function(response){
   			console.log(response);
-  		var firstName = response.data[0].firstName;
-  			console.log(firstName);
- 	})
-
+  		// var firstName = response.data[0].firstName;
+  		// 	console.log(firstName);
+ 	});
 
  }
 	render(){
 		return(
 			<div className="MyTools">
 					<h2>MyTools Page</h2>
-						<div className="UserAddress">
-							{this.props.useraddress}
-						</div>
+
 						<div className="UsersTools">
 
 						</div>
