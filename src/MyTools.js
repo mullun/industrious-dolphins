@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import "./AddTool";
 import "./MyTools.css";
-import "../utils/helpers.js";
+// import "../utils/helpers.js";
 
 class MyTools extends Component {
 
-	componentDidMount(){
-		helpers.getMyToolsUser()
-		.then(function(response){
-			var userID = response.
-		})
+	// componentDidMount(){
+	// 	helpers.getMyToolsUser()
+	// 	.then(function(response){
+	// 		var userID = response.
+	// 	})
 
-	}
+	// }
 
 	render(){
 		return(

@@ -15,7 +15,7 @@ class SignUp extends Component {
       firstNameRecd: '',
       lastNameRecd: '',
       groupNameRecd: '',
-      arrayOfGroups: []
+      arrayOfGroups: ["first"]
     };
 
     this.submitUserDetails = this.submitUserDetails.bind(this);
@@ -27,25 +27,25 @@ class SignUp extends Component {
     this.handleGroupNameChange = this.handleGroupNameChange.bind(this);
   }
 
-  // componentDidMount(){
-  //   // get list of group names in the database to show the user to choose
-  //   console.log("Component Did Mount");
-  //   return axios.get("/getGroups", {
-  //     })
-  //     .then(function (response) {
-  //       console.log("Groups in the Database");
-  //       var newArray = this.state.arrayOfGroups.slice();
-  //       for (var i=0; i < response.data.length; i++){
-  //           console.log(response.data[i].groupName);
-  //           console.log("\n");
-  //           newArray.push(response.data[i].groupName);   
-  //       }
-  //       this.setState({ arrayOfGroups:newArray });
-  //     })
-  //     .catch(function (error) {
-  //       console.log("error", error);
-  //     });
-  // }
+  componentDidMount(){
+    // get list of group names in the database to show the user to choose
+    console.log("Component Did Mount");
+    return axios.get("/getGroups", {
+      })
+      .then(function (response) {
+        console.log("Groups in the Database");
+        var newArray = this.state.arrayOfGroups.slice();
+        for (var i=0; i < response.data.length; i++){
+            console.log(response.data[i].groupName);
+            console.log("\n");
+            newArray.push(response.data[i].groupName);   
+        }
+        this.setState({ arrayOfGroups:newArray });
+      })
+      .catch(function (error) {
+        console.log("error", error);
+      });
+  }
 
   handleEmailChange(e) {
     this.setState({ emailRecd: e.target.value });
