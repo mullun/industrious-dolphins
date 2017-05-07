@@ -15,7 +15,7 @@ class SignUp extends Component {
       firstNameRecd: '',
       lastNameRecd: '',
       groupNameRecd: '',
-      arrayOfGroups: ["first"]
+      arrayOfGroups: []
     };
 
     this.submitUserDetails = this.submitUserDetails.bind(this);
@@ -30,21 +30,35 @@ class SignUp extends Component {
   componentDidMount(){
     // get list of group names in the database to show the user to choose
     console.log("Component Did Mount");
-    return axios.get("/getGroups", {
-      })
-      .then(function (response) {
-        console.log("Groups in the Database");
-        var newArray = this.state.arrayOfGroups.slice();
-        for (var i=0; i < response.data.length; i++){
-            console.log(response.data[i].groupName);
-            console.log("\n");
-            newArray.push(response.data[i].groupName);   
-        }
-        this.setState({ arrayOfGroups:newArray });
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
+    var newArray = this.state.arrayOfGroups;
+    var s = $('<select />', { id: "dropDown" });
+    // var inpu = $("<input />", {type:"text"});
+    // inpu.appendTo("#groupSelect");
+    // var datali = $("<datalist />");
+
+
+    axios.get("/getGroups", {
+    })
+    .then(function(response){
+      for (var i=0; i < response.data.length; i++) {
+         // console.log(response.data[i].groupName);
+         // console.log("\n");
+         newArray.push(response.data[i].groupName);
+         // console.log("trying to populate options");   
+         $('<option />', { value: i, text: response.data[i].groupName }).appendTo(s);
+      }
+      // console.log("newArray");
+      // console.log(newArray);
+      // console.log("trying to append to div");
+      s.appendTo('#groupSelect');
+      // console.log("appended to div");
+    });
+    // console.log("arrayOfGroups to be set ");
+    this.setState({ arrayOfGroups: newArray });
+    // console.log("arrayOfGroups has been set ");
+    // console.log(this.state.arrayOfGroups);
+    // console.log(newArray.length);
+
   }
 
   handleEmailChange(e) {
@@ -76,7 +90,8 @@ class SignUp extends Component {
 
     console.log("Submit button clicked to sign up");
     console.log("email = " + this.state.emailRecd);
-    console.log("Group Name = " + this.state.groupNameRecd);
+    var groupNameSelected = $("#dropDown :selected").text();
+    console.log(groupNameSelected);
 
     return axios.post("/submitUser", {
         email: this.state.emailRecd,
@@ -118,7 +133,8 @@ class SignUp extends Component {
           <br/><br/>
           <input value={lastNameEntered} onChange={this.handleLastNameChange} placeholder="last name" />
           <br/><br/>
-          <input value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Group Name" />
+          <div id="groupSelect">
+          </div>
         </fieldset>
         <br/>
         <div className="col-sm-06 buttonColumn">
