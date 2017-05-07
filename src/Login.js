@@ -28,6 +28,7 @@ class Login extends Component {
   handleSubmit(event) {
   	event.preventDefault();
 
+    console.log("login button clicked!")
   	axios.post("/checkLogin", {
   		email: this.state.email,
   		password: this.state.password

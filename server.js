@@ -126,9 +126,9 @@ app.post("/submitUser", function(req, res) {
 });
 
 // This is the route we will send POST requests for logging in.
-// app.post("/checkLogin", passport.authenticate("local"), function(req, res) {
-//   console.log("req.session.username" + req.session.username)
-// })
+app.post("/checkLogin", function(req, res) {
+  console.log("req.body.email " + req.body.email)
+})
 
 
 // -------------------------------------------------
