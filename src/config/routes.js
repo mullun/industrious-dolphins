@@ -19,8 +19,7 @@ var hashHistory = router.hashHistory;
 var IndexRoute = router.IndexRoute;
 
 //Reference the high level components
-var Main = require("../Main");
-var Home = require("../Home");
+var Login = require("../Login");
 var SignUp = require("../SignUp");
 var SignUpPossible = require("..SignUpPossible");
 var Borrow = require("../Borrow");

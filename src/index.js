@@ -14,7 +14,6 @@ import Login from './Login';
 
 // import Home from './Home';
 
-import Main from "./Main"
 import AddTool from "./AddTool";
 import MyTools from "./MyTools";
 import BorrowTool from "./BorrowTool";
