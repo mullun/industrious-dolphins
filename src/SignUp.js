@@ -99,7 +99,7 @@ class SignUp extends Component {
         confirmPassword: this.state.confirmPasswordRecd,
         firstName:this.state.firstNameRecd,
         lastName:this.state.lastNameRecd,
-        groupName: this.state.groupNameRecd
+        groupName: groupNameSelected
       })
       .then(function (response) {
         console.log(response);

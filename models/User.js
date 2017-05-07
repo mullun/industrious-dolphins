@@ -17,11 +17,6 @@ var UserSchema = new Schema({
   lastName: {
     type: String
   },
-
-  date: {
-    // 
-    type: Date
-  },
   toolsOwned: [{
 
     type: Schema.Types.ObjectId,
