@@ -3,7 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-// var passport = require("./src/config/passport");
+var passport = require("./src/config/passport");
 
 // Require User Schema
 var User = require('./models/User.js');
@@ -31,9 +31,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // -------------------------------------------------
 
 // Initialize Passport
-// app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+
 
 // MongoDB Configuration configuration
 mongoose.connect("mongodb://localhost/toolshare");
@@ -126,10 +127,10 @@ app.post("/submitUser", function(req, res) {
 });
 
 // This is the route we will send POST requests for logging in.
-app.post("/checkLogin", function(req, res) {
-  console.log("req.body.email " + req.body.email)
+app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
+  // console.log(req.user.password)
+  res.send("Signed in!")
 })
-
 
 // -------------------------------------------------
 // This is the route we will send POST requests to save a group name to db.
@@ -203,6 +204,12 @@ app.get("/getGroups", function(req, res) {
     }
   });
 });
+
+// -------------------------------------------------
+// This is the route we will send GET list of groups in the Data Base.
+// app.get("/checkLogin", function(req, res) {
+//   console.log("this is app.get for /checkLogin");
+// });
 
 // -------------------------------------------------
 // Listener
