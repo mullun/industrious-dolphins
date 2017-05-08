@@ -4,6 +4,7 @@ import axios from "axios";
 import $ from "jquery";
 
 
+
 class SignUp extends Component {
   constructor (props) {
     super(props);
@@ -98,12 +99,8 @@ class SignUp extends Component {
         groupName: groupNameSelected,
         groupNew: newGroup
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
+      .then( window.location.href = 'http://localhost:3000/');
+      // hard coded to go to home page
   }
 
   render () {

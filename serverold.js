@@ -3,8 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
-var session = require("express-session");
-var passport = require("./src/config/passport");
+// var passport = require("./src/config/passport");
 
 // Require User Schema
 var User = require('./models/User.js');
@@ -32,11 +31,9 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // -------------------------------------------------
 
 // Initialize Passport
-app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-app.use(passport.initialize());
-app.use(passport.session());
 // app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
-
+// app.use(passport.initialize());
+// app.use(passport.session());
 
 // MongoDB Configuration configuration
 mongoose.connect("mongodb://localhost/toolshare");
@@ -54,14 +51,14 @@ db.once("open", function() {
 
 
 // Main "/" Route. This will redirect the user to our rendered React application
-app.get('/', function(req, res) {
+app.get("/", function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
-
 
 // This is the route we will send GET requests to retrieve or to post data to db.
 // We will call this route the moment our page gets rendered
 app.get("/api", function(req, res) {
+
   // We will find all the records, sort it in descending order, then limit the records to 5
   // History.find({}).sort([
   //   ["date", "descending"]
@@ -163,14 +160,10 @@ app.post("/submitUser", (req, res) => {
   
 });
 
-
 // This is the route we will send POST requests for logging in.
-app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
-  // console.log("inside check login");
-  // console.log(req.session.passport.user);
-  res.send(req.user);
+app.post("/checkLogin", function(req, res) {
+  console.log("req.body.email " + req.body.email)
 })
-
 
 
 // -------------------------------------------------
@@ -192,6 +185,8 @@ app.post("/createGroup", function(req, res) {
     }
   });
 });
+
+
 
 //Add tool to database
 app.post("/submitTool", function(req, res){
@@ -233,39 +228,37 @@ app.get("/getTools", function(req, res){
 
 // -------------------------------------------------
 // This is the route we will send GET list of groups in the Data Base.
-app.get("/getGroups", function(req, res) {
+app.get("/getGroups", (req, res) => {
   console.log("got into getGroups GET in Server");
   // We'll use Date.now() to always get the current date time
-  Group.find({}, function(err, groups) {
+  Group.find({}, (err, groups) => {
     if (err) {
       res.json(err);
     }
     else {
-      res.json(groups);
+      res.json (groups);
     }
   });
 });
 
 // -------------------------------------------------
 // This is the route we will send GET list of groups in the Data Base.
-// app.get("/checkLogin", function(req, res) {
-//   console.log("this is app.get for /checkLogin");
-// });
-// This is the route we will send GET list of groups in the Data Base.
-app.get("/getMyTools", function(req, res) {
-  console.log("got into getMytools GET in Server");
-  // We'll use Date.now() to always get the current date time
-  Tool.find({}, function(err, tools) {
-    if (err) {
-      console.log("error finding tools");
-      res.json(err);
-    }
-    else {
-      console.log("sending tools");
-      res.json(tools);
-    }
-  });
+app.get("/getMyTools", (req, res) => {
+  console.log("got into getMyTools GET in Server");
+    Tool.find({
+      "toolOwner": "111111111"  //hardcoded for now
+    }).exec( (err, tools) => {
+      if(err){
+        console.log("error finding tools");
+      }
+      else {
+        console.log("found tools");
+        console.log(tools);
+        res.json(tools);
+      }
+    })
 });
+
 // -------------------------------------------------
 // Listener
 app.listen(PORT, function() {
