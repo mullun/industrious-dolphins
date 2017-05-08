@@ -7,7 +7,7 @@ import Greeting from './Greeting';
 
 class App extends Component {
   render() {
-    return this.props.loggedIn ? <MyTools /> : <Greeting />;
+    return this.props.isLoggedIn ? <MyTools /> : <Greeting />;
   }
 }
 

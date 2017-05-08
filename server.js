@@ -3,6 +3,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var logger = require("morgan");
 var mongoose = require("mongoose");
+var session = require("express-session");
 var passport = require("./src/config/passport");
 
 // Require User Schema
@@ -31,9 +32,10 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 // -------------------------------------------------
 
 // Initialize Passport
+app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
+// app.use(passport.session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 
 
 // MongoDB Configuration configuration
@@ -52,14 +54,14 @@ db.once("open", function() {
 
 
 // Main "/" Route. This will redirect the user to our rendered React application
-app.get("/", function(req, res) {
+app.get('/', function(req, res) {
   res.sendFile(__dirname + "/public/index.html");
 });
+
 
 // This is the route we will send GET requests to retrieve or to post data to db.
 // We will call this route the moment our page gets rendered
 app.get("/api", function(req, res) {
-
   // We will find all the records, sort it in descending order, then limit the records to 5
   // History.find({}).sort([
   //   ["date", "descending"]
@@ -161,11 +163,15 @@ app.post("/submitUser", (req, res) => {
   
 });
 
+
 // This is the route we will send POST requests for logging in.
 app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
-  // console.log(req.user.password)
-  res.send("Signed in!")
+  // console.log("inside check login");
+  // console.log(req.session.passport.user);
+  res.send(req.user);
 })
+
+
 
 // -------------------------------------------------
 // This is the route we will send POST requests to save a group name to db.
