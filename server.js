@@ -86,40 +86,75 @@ app.get("/mytools", function(req, res){
 });
 
 // This is the route we will send POST requests to save user data to db.
-app.post("/submitUser", function(req, res) {
-  console.log("BODY: " + req.body);
+app.post("/submitUser", (req, res) => {
+  console.log("BODY: ", req.body);
+  console.log(req.body.groupNew);
+  console.log(req.body.groupName);
   var groupIdReceived;
-
-  Group.find({
-    "groupName": req.body.groupName
-  }).exec( (err, group) => {
-    if(err){
-      console.log("error finding group");
-    }
-    else {
-      console.log("group[0]._id");
-      console.log(group);
-      console.log(group[0]._id);
-      groupIdReceived = group[0]._id;
-
-      User.create({
+  // check to see if this is a new Group Name
+  if (req.body.groupNew) {
+    console.log("new group requested " + req.body.groupName);
+    Group.create({
+      groupName: req.body.groupName,
+      date: Date.now()
+    }, (err, createdGroup) => {
+      if (err) {
+        console.log("error creating group ", err);
+      }
+      else {
+        console.log("newly created group");
+        console.log(createdGroup);
+        User.create({
           email: req.body.email,
           password: req.body.password,
           confirmPassword: req.body.confirmPassword,
           firstName:req.body.firstName,
           lastName:req.body.lastName,
-          groupId:groupIdReceived, // dummy data
+          groupId:createdGroup._id,
           userCreatedDate: Date.now()
-      }, function(err) {
-        if (err) {
-          console.log("error saving user ", err);
-        }
-        else {
-          res.send("Saved User");
-        }
-      });
-    }
-  })
+        }, (err, createdUser) => {
+          if (err) {
+            console.log("error saving user ", err);
+          }
+          else {
+            res.json(createdUser);
+          }
+        });
+      }
+    });
+  }
+  else {
+    Group.find({
+      "groupName": req.body.groupName
+    }).exec( (err, group) => {
+      if(err){
+        console.log("error finding group");
+      }
+      else {
+        console.log("group[0]._id");
+        console.log(group);
+        console.log(group[0]._id);
+        groupIdReceived = group[0]._id;
+
+        User.create({
+            email: req.body.email,
+            password: req.body.password,
+            confirmPassword: req.body.confirmPassword,
+            firstName:req.body.firstName,
+            lastName:req.body.lastName,
+            groupId:groupIdReceived, // dummy data
+            userCreatedDate: Date.now()
+        }, (err) => {
+          if (err) {
+            console.log("error saving user ", err);
+          }
+          else {
+            res.send("Saved User");
+          }
+        });
+      }
+    })
+  }
 
   // Here we'll save the location based on the JSON input.
   // We'll use Date.now() to always get the current date time
