@@ -229,9 +229,9 @@ module.exports = function (app) {
   app.post("/getMyTools", function(req, res) {
     console.log("got into getMytools GET in Server");
     // We'll use Date.now() to always get the current date time
-    console.log(req.body.userName);
+    console.log(req.user.id);
     Tool.find({
-      toolOwner : req.body.userName
+      toolOwner : req.user.id
     }, function(err, tools) {
       if (err) {
         console.log("error finding tools");
