@@ -2,13 +2,28 @@ import React, { Component } from 'react';
 //import "./Available.css";
 import axios from 'axios';
 
+import { 
+	ListGroup,
+	ListGroupItem,
+	Modal,
+	Button
+} from 'react-bootstrap/lib/';
+
+
 class Available extends Component {
 
 	constructor(props) {
 		super(props);
 
 		this.state= {
-			availableTools: []
+			availableTools: [],
+			toolName: [],
+			showModal: false,
+			currentToolName: '',
+			currentToolOwner: '',
+			currentToolDays: '',
+			currentToolPrice: '',
+			currentToolCondition: ''
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
@@ -24,14 +39,16 @@ class Available extends Component {
 
 	getAvailable () {
 		var available = [];
+		var toolName = [];
 
 		axios.get("/getTools", {}).then((response)=>{
-			//console.log(response);
 			for(var i=0; i<response.data.length; i++){
 				if(response.data[i].toolStatus){
 					available.push(response.data[i]);
+					toolName.push(<ListGroupItem onClick={this.currentTool} value={response.data[i].toolName} className="available" id={i} key={i}>{response.data[i].toolName}</ListGroupItem>);
 				}
 			}
+
 			console.log("getAvailable result: " +JSON.stringify(available));
 			this.setState({ availableTools: available });
 			console.log(this.state.availableTools);
@@ -65,6 +82,19 @@ class Available extends Component {
 			})
 
 	}
+
+	currentTool(event) {
+    	this.setState({currentToolName: this.state.availableTools[event.target.id].toolName});
+    	this.setState({currentToolOwner: this.state.availableTools[event.target.id].toolOwner});
+    	this.setState({currentToolDays: this.state.availableTools[event.target.id].toolMaxDays});
+    	this.setState({currentToolPrice: this.state.availableTools[event.target.id].toolPrice});
+    	this.setState({currentToolCondition: this.state.availableTools[event.target.id].toolConditon});
+    	this.setState({showModal: true});
+  	}
+
+	close() {
+    	this.setState({showModal: false});
+  	}
  
 	render(){
 		return(
@@ -93,8 +123,9 @@ class Available extends Component {
 							)
 					}, this)}
 				</div>
+
 			</div>
-			);
+		);
 	}
 }
 

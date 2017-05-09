@@ -34,6 +34,10 @@ var ToolSchema = new Schema ({
 	toolOwner: {
 		type: String
 	},
+	toolDue: {
+		// added tool due date - ML
+		type: Date
+	},
 	toolCreatedDate: {
 		type:Date
 	}
