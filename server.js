@@ -171,6 +171,11 @@ app.post("/checkLogin", passport.authenticate("local"), function(req, res, next)
   res.send(req.user);
 })
 
+app.get("/checkLogin", function(req, res) {
+  console.log("inside app.get/checkLogin in server.js");
+  console.log(req.session.passport.user);
+  res.send(req.session.passport.user);
+})
 
 
 // -------------------------------------------------
