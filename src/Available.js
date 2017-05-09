@@ -56,10 +56,10 @@ class Available extends Component {
 
 	currentTool(event) {
     	this.setState({currentToolName: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolOwner: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolDays: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolPrice: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolCondition: this.state.availableTools[event.target.id].toolName});
+    	this.setState({currentToolOwner: this.state.availableTools[event.target.id].toolOwner});
+    	this.setState({currentToolDays: this.state.availableTools[event.target.id].toolMaxDays});
+    	this.setState({currentToolPrice: this.state.availableTools[event.target.id].toolPrice});
+    	this.setState({currentToolCondition: this.state.availableTools[event.target.id].toolConditon});
     	this.setState({showModal: true});
   	}
 
