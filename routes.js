@@ -179,10 +179,10 @@ module.exports = function (app) {
       toolPrice: req.body.toolPrice,
       toolCondition: req.body.toolCondition,
       toolStatus: true,
-      toolHeldBy: user,
+      toolHeldBy: req.user.id,
       toolMaxDays: req.body.toolMaxDays,
       toolUrl: req.body.toolUrl,
-      toolOwner: user,
+      toolOwner: req.user.id,
       toolCreateDate: Date.now()
     }, function(err){
       if(err) {
