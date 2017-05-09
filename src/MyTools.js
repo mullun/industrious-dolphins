@@ -20,8 +20,8 @@ class MyTools extends Component {
 		var tempArticle = $("<Article />");
 		console.log("created tempArticle");
 
-		axios.get("/getMyTools", {
-			userName : "e123"
+		axios.post("/getMyTools", {
+			userName : "e201"
     }).then( (response) => {
     	console.log(response);
     	console.log("response.data.length = " + response.data.length);
