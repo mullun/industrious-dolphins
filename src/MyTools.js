@@ -33,34 +33,32 @@ class MyTools extends Component {
     })
 	}
 
-<<<<<<< HEAD
- componentDidMount(){
- 	return axios.get("/mytools")
-  		.then(function(response){
-  			console.log(response);
-  		// var firstName = response.data[0].firstName;
-  		// 	console.log(firstName);
- 	});
+ // componentDidMount(){
+ // 	return axios.get("/mytools")
+ //  		.then(function(response){
+ //  			console.log(response);
+ //  		// var firstName = response.data[0].firstName;
+ //  		// 	console.log(firstName);
+ // 	});
 
- }
-=======
+ // }
 
->>>>>>> master
+
 	render(){
 		return(
-			<div className="MyTools">
-					<h2>MyTools Page</h2>
-<<<<<<< HEAD
+			// <div className="MyTools">
+			// 		<h2>MyTools Page</h2>
 
-						<div className="UsersTools">
 
-=======
+			<div className="UsersTools">
+
+
 						<div className="UserAddress">
 							{this.props.useraddress}
 						</div>
 						<div id="userToolDiv" className="UsersTools">
 							<p>Your tools</p>
->>>>>>> master
+
 						</div>
 			</div>
 		);
