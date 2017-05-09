@@ -52,7 +52,7 @@ ReactDOM.render(
 			    </div>
 			    <div id="navbar" className="navbar-collapse collapse">
 			      <ul className="nav navbar-nav">
-			        <li><NavLink activeClassName="activeNav" to="/mytools">My Tools</NavLink></li>
+			        <li><NavLink activeClassName="activeNav" to="/getMyTools">My Tools</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/addtool">Add a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/borrowtool">Borrow a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/returntool">Return a Tool</NavLink></li>
@@ -71,7 +71,7 @@ ReactDOM.render(
 	
 		        <Route path="/addtool" component={AddTool}></Route>
 		        <Route path="/borrowtool" component={BorrowTool}></Route>
-		        <Route path="/mytools" component={MyTools}></Route>
+		        <Route path="/getMyTools" component={MyTools}></Route>
 		        <Route path="/returntool" component={ReturnTool}></Route>
 		        <Route path="/replacetool" component={ReplaceTool}></Route>
 		    
