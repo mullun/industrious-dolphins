@@ -83,7 +83,12 @@ app.use(function(req, res, next){
   res.locals.error = req.flash("error");
   res.locals.user = req.user || null;
   next();
+
+  // Here we'll save the location based on the JSON input.
+  // We'll use Date.now() to always get the current date time
+  
 });
+
 
 require('./routes.js')(app);
 

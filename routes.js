@@ -12,6 +12,18 @@ var isAuthenticated = require("./src/config/isAuthenticated");
 
 module.exports = function (app) {
 
+  // This is the route we will send POST requests for logging in.
+  app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
+    // console.log("inside check login");
+    // console.log(req.session.passport.user);
+    res.send(req.user);
+  });
+
+  app.get("/checkLogin", function(req, res) {
+    console.log("inside app.get/checkLogin in server.js");
+    console.log(req.session.passport.user);
+    res.send(req.session.passport.user);
+  });
 
 
   // Main "/" Route. This will redirect the user to our rendered React application
