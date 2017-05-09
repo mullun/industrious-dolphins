@@ -198,7 +198,7 @@ app.post("/submitTool", function(req, res){
   console.log("addTool BODY: ");
   console.log(req.body);
 
-  var user = 111111111;
+  var user = "e201";
 
   Tool.create({
     toolName: req.body.toolName,
@@ -252,16 +252,20 @@ app.get("/getGroups", function(req, res) {
 //   console.log("this is app.get for /checkLogin");
 // });
 // This is the route we will send GET list of groups in the Data Base.
-app.get("/getMyTools", function(req, res) {
+app.post("/getMyTools", function(req, res) {
   console.log("got into getMytools GET in Server");
   // We'll use Date.now() to always get the current date time
-  Tool.find({}, function(err, tools) {
+  console.log(req.body.userName);
+  Tool.find({
+    toolOwner : req.body.userName
+  }, function(err, tools) {
     if (err) {
       console.log("error finding tools");
       res.json(err);
     }
     else {
       console.log("sending tools");
+      console.log(tools);
       res.json(tools);
     }
   });
