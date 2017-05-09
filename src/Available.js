@@ -27,10 +27,11 @@ class Available extends Component {
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 		this.getAvailable = this.getAvailable.bind(this);
-		this.currentTool = this.currentTool.bind(this);
-	    this.close = this.close.bind(this);	
-	}
+		this.borrowTool = this.borrowTool.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}	
 
 	componentDidMount () {
 		this.getAvailable();
@@ -50,8 +51,36 @@ class Available extends Component {
 
 			console.log("getAvailable result: " +JSON.stringify(available));
 			this.setState({ availableTools: available });
-			this.setState({ toolName: toolName })
-		});	
+			console.log(this.state.availableTools);
+		});
+	
+	}
+
+	componentDidUpdate (prevState, prevProps) {
+
+			// this.getAvailable();
+
+	}
+
+	handleClick (i) {
+
+		var tools = this.state.availableTools;
+
+		var toolToBorrow = tools[i];
+
+		this.borrowTool(toolToBorrow);
+		this.getAvailable();		
+	}
+
+	borrowTool (tool) {
+
+		axios.post("/borrowTool", {id: tool._id})
+			.then(function(response){
+				console.log(response);
+			}).catch(function(err){
+				console.log(err);
+			})
+
 	}
 
 	currentTool(event) {
@@ -69,28 +98,32 @@ class Available extends Component {
  
 	render(){
 		return(
-			<div className="Available">
-				<h2>Available Tools</h2>
-				<ListGroup>
-					{this.state.toolName}
-				</ListGroup>
+			<div className="available container col-md-6">
+				<h2>Available Tool Component</h2>
+				<div className="thumbnails">
+					{this.state.availableTools.map(function(search, i){
+						return (
+								<div className="col-md-4">
+									<div className="thumbnail">
+										<img src={search.toolUrl} className="img-responsive" />
+										<div className="caption">
+											<h3>{search.toolName}</h3>
+											<p>Owner: {search.toolOwner}</p>
+											<p>Condition: {search.toolCondition}</p>
+											<button
+												className="btn"
+												value={i}
+												onClick= {() => this.handleClick(i)}
+											>
+												Borrow
+											</button>	
+										</div>		
+									</div>
+								</div>
+							)
+					}, this)}
+				</div>
 
-				<Modal show={this.state.showModal} onHide={this.close}>
-					<Modal.Header>
-			        	<Modal.Title>{this.state.currentToolName}</Modal.Title>
-			      	</Modal.Header>
-					<Modal.Body>
-						    <h3>Owner: {this.state.currentToolOwner}</h3>
-						    <h3>Price: {this.state.currentToolPrice}</h3>
-						    <h3>Condition: {this.state.currentToolCondition}</h3>
-						    <h3>Max # of Days Rented: {this.state.currentToolDays}</h3>
-					</Modal.Body>
-
-					<Modal.Footer>
-						<Button bsStyle="primary" onClick={this.close}>Borrow</Button>
-						<Button bsStyle="danger" onClick={this.close}>Close</Button>
-					</Modal.Footer>
-				</Modal>
 			</div>
 		);
 	}
