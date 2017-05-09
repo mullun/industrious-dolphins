@@ -49,10 +49,10 @@ class Greeting extends Component {
 	  	axios.post("/checkLogin", {
 	  		email: this.state.email,
 	  		password: this.state.password
-	  	}).then(this.setState({isLoggedIn: true}))
+	  	}).then(
+        this.setState({isLoggedIn: true})
+      ).then(window.location.href = 'http://localhost:3000/getMyTools')
 
-	    console.log("children: ");
-	    console.log();
 	    console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
   	}
     
@@ -104,12 +104,11 @@ class Greeting extends Component {
             onChange={this.handleChange}
             required
           /><br/><br/>
-
-          <button onClick={this.handleSubmit}>Login</button>
         </form>
       </Modal.Body>
 
       <Modal.Footer>
+        <Button bsStyle="primary" onClick={this.handleSubmit}>Login</Button>
         <Button onClick={this.close}>Close</Button>
       </Modal.Footer>
     </Modal>
