@@ -4,6 +4,7 @@ import axios from "axios";
 import $ from "jquery";
 
 
+
 class SignUp extends Component {
   constructor (props) {
     super(props);
@@ -28,38 +29,24 @@ class SignUp extends Component {
   }
 
   componentDidMount(){
+    this.setState({ groupNameRecd: "" }); 
     // get list of group names in the database to show the user to choose
     console.log("Component Did Mount");
     var newArray = this.state.arrayOfGroups;
     var s = $('<select />', { id: "dropDown" });
-    // var inpu = $("<input />", {type:"text"});
-    // inpu.appendTo("#groupSelect");
-    // var datali = $("<datalist />");
-
-
+    $('<option />', { value: -1, text: "Select an Existing Group" }).appendTo(s);
     axios.get("/getGroups", {
     })
     .then(function(response){
       for (var i=0; i < response.data.length; i++) {
-         // console.log(response.data[i].groupName);
-         // console.log("\n");
-         newArray.push(response.data[i].groupName);
-         // console.log("trying to populate options");   
+         newArray.push(response.data[i].groupName); 
          $('<option />', { value: i, text: response.data[i].groupName }).appendTo(s);
       }
-      // console.log("newArray");
-      // console.log(newArray);
-      // console.log("trying to append to div");
       s.appendTo('#groupSelect');
-      // console.log("appended to div");
     });
-    // console.log("arrayOfGroups to be set ");
     this.setState({ arrayOfGroups: newArray });
-    // console.log("arrayOfGroups has been set ");
-    // console.log(this.state.arrayOfGroups);
-    // console.log(newArray.length);
-
   }
+
 
   handleEmailChange(e) {
     this.setState({ emailRecd: e.target.value });
@@ -89,9 +76,19 @@ class SignUp extends Component {
   submitUserDetails() {
 
     console.log("Submit button clicked to sign up");
-    console.log("email = " + this.state.emailRecd);
+    // assume user selected an existing group
+    var newGroup = false;
     var groupNameSelected = $("#dropDown :selected").text();
-    console.log(groupNameSelected);
+    // check to see if user selected an existing group
+    var groupNameValue = $("#dropDown :selected").val();
+    if ( ( $("#dropDown :selected").val() ) < 0 ) {
+      newGroup = true;
+      groupNameSelected = this.state.groupNameRecd;
+    }
+
+    console.log("email = " + this.state.emailRecd);
+    console.log("existing group? " + groupNameValue);
+    console.log("group name sent " + groupNameSelected);
 
     return axios.post("/submitUser", {
         email: this.state.emailRecd,
@@ -99,14 +96,11 @@ class SignUp extends Component {
         confirmPassword: this.state.confirmPasswordRecd,
         firstName:this.state.firstNameRecd,
         lastName:this.state.lastNameRecd,
-        groupName: groupNameSelected
+        groupName: groupNameSelected,
+        groupNew: newGroup
       })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log("error", error);
-      });
+      .then( window.location.href = 'http://localhost:3000/');
+      // hard coded to go to home page
   }
 
   render () {
@@ -135,6 +129,9 @@ class SignUp extends Component {
           <br/><br/>
           <div id="groupSelect">
           </div>
+          <p>or</p>
+          <input value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Enter name of New Group" />
+          <br/>
         </fieldset>
         <br/>
         <div className="col-sm-06 buttonColumn">

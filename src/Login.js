@@ -12,7 +12,8 @@ class Login extends Component {
       user: {
       	email: '',
       	password: ''
-      }
+      },
+      isLoggedIn: false
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -28,14 +29,11 @@ class Login extends Component {
   handleSubmit(event) {
   	event.preventDefault();
 
+    console.log("login button clicked!")
   	axios.post("/checkLogin", {
   		email: this.state.email,
   		password: this.state.password
-  	}).then(function(res){
-  		console.log(res)
-  	}).catch(function(err){
-  		console.log(err)
-  	})
+  	}).then(this.setState({isLoggedIn: true}))
   	
     console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
   }  
@@ -60,19 +58,19 @@ class Login extends Component {
                 	<strong>Password</strong>
                 </h4>
                 <input
-                    type="text"
+                    type="password"
                     value={this.state.text}
                     id="password"
                     onChange={this.handleChange}
                     required
                 /><br/><br/>
 
-		        <button type="submit">Login</button>
+            <button onClick={this.handleSubmit}>Login</button>
     		</form>
+        
     	</div>
     );
   }
 }
-
 
 export default Login;
