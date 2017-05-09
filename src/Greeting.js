@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 
 // import {
 // 	NavLink,
@@ -6,11 +6,12 @@ import React, { Component } from 'react';
 // import './Greeting.css';
 import axios from "axios";
 
-import Modal from 'react-bootstrap/lib/Modal';
-import OverlayTrigger from 'react-bootstrap/lib/OverlayTrigger';
-import Button from 'react-bootstrap/lib/Button';
-import Popover from 'react-bootstrap/lib/Popover';
-import Tooltip from 'react-bootstrap/lib/Tooltip';
+import {
+  Modal,
+  OverlayTrigger,
+  Button
+} from 'react-bootstrap/lib/';
+
 
 class Greeting extends Component {
   
@@ -71,7 +72,7 @@ class Greeting extends Component {
 	      		<h1>Welcome to ToolShare!</h1>
 	        	<h3>Need a tool but don't want to buy it? Borrow it from a friend!</h3>
 
-			<Button
+			    <Button
             bsStyle="primary"
             bsSize="large"
             onClick={this.open}
