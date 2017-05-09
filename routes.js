@@ -179,10 +179,10 @@ module.exports = function (app) {
       toolPrice: req.body.toolPrice,
       toolCondition: req.body.toolCondition,
       toolStatus: true,
-      toolHeldBy: req.user.id,
+      toolHeldBy: user,
       toolMaxDays: req.body.toolMaxDays,
       toolUrl: req.body.toolUrl,
-      toolOwner: req.user.id,
+      toolOwner: user,
       toolCreateDate: Date.now()
     }, function(err){
       if(err) {
@@ -241,6 +241,24 @@ module.exports = function (app) {
         console.log("sending tools");
         console.log(tools);
         res.json(tools);
+      }
+    });
+  });
+
+  app.post("/borrowTool", function(req, res){
+    var id = req.body.id;
+    var user = req.params.id;
+
+    Tool.findOneAndUpdate({
+      _id: id
+    }, { $set: {
+      toolHeldBy: user,
+      toolStatus: false
+    }}, function(err, doc){
+      if(err){
+        console.log(err);
+      } else {
+        console.log(doc);
       }
     });
   });

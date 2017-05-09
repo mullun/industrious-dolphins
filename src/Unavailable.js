@@ -19,6 +19,10 @@ class Unavailable extends Component {
 		this.getUnavailable();
 	}
 
+	componentDidUpdate (prevState, prevProps) {
+		// this.getUnavailable();
+	}
+
 	getUnavailable () {
 		var unavailable = [];
 
@@ -38,8 +42,24 @@ class Unavailable extends Component {
 	}	
 	render(){
 		return(
-			<div className="Unavailable">
+			<div className="unavailable container col-md-6">
 				<h2>Unavailable Tool Component</h2>
+					<div className="thumbnails">
+						{this.state.unavailableTools.map(function(search, i){
+							return (
+								<div className="col-md-4">
+									<div className="thumbnail">
+										<img src={search.toolUrl} className="img-responsive" />
+										<div className="caption">
+											<h3>{search.toolName}</h3>
+											<p>Owner: {search.toolOwner}</p>
+											<p>Condition: {search.toolCondition}</p>
+										</div>		
+									</div>
+								</div>
+								)
+						}, this)}
+					</div>				
 			</div>
 			);
 	}
