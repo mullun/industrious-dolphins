@@ -255,6 +255,21 @@ module.exports = function (app) {
     });
   });
 
+  app.get("/returnableTools", function(req, res){
+    var user = req.user.id;
+
+    Tool.find({
+      toolHeldBy: user,
+      toolStatus: false
+    }).exec(function(err, doc){
+      if(err){
+        res.json(err);
+      }else{
+        res.send(doc);
+      }
+    })
+  });
+
   app.post("/borrowTool", function(req, res){
     var id = req.body.id;
     var user = req.user.id;
@@ -274,6 +289,23 @@ module.exports = function (app) {
         console.log(doc);
       }
     });
+  });
+
+  app.post("/returnableTools", function(req, res){
+    var id = req.body.id;
+
+    Tool.findOneAndUpdate({
+      _id: id
+    }, {$set:{
+      toolHeldBy: this.toolOwner,
+      toolStatus: true
+    }}, function(err, doc){
+      if(err){
+        console.log(err);
+      } else {
+        console.log(doc);
+      }      
+    });    
   });
 
 }

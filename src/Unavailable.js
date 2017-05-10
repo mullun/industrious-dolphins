@@ -11,7 +11,6 @@ class Unavailable extends Component {
 			unavailableTools: this.props.unavailableTools
 		};
 
-		this.componentDidMount = this.componentDidMount.bind(this);
 		this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
 	}
 

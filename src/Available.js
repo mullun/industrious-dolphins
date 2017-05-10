@@ -66,14 +66,10 @@ class Available extends Component {
 			this.setState({ unavailableTools: unavailable });
 			console.log(this.state.unavailableTools);
 		});	
-	}	
+	}
 
 	componentDidUpdate (prevState, prevProps) {
 
-		// if(this.state !== this.prevState){
-		// 	this.getAvailable();
-		// 	this.getUnavailable();
-		// }
 		if(this.state.update){
 			this.getAvailable();
 			this.getUnavailable();
