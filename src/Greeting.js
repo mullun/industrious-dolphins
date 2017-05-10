@@ -140,9 +140,8 @@ class Greeting extends Component {
 	  	axios.post("/checkLogin", {
 	  		email: this.state.email,
 	  		password: this.state.password
-	  	}).then(
-        this.setState({isLoggedIn: true})
-      ).then(window.location.href = 'http://localhost:3000/getMyTools')
+	  	}).then(this.setState({isLoggedIn: true}))
+        .then(this.setState({showModal: false}))
 
 	    console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
   	}
