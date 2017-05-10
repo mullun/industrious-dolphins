@@ -1,0 +1,43 @@
+body, html {
+	background: url("../public/background-darker.jpg") no-repeat;
+	background-size: cover;	
+	background-position:center;
+	background-attachment: fixed;
+	
+	height:100%;
+	text-align:center;
+	font-family: 'Oswald', sans-serif;
+}
+
+.white, h2 {
+	color: white;
+	text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+h2.black {
+	color: #333;
+	text-shadow: none;
+}
+
+h1 {
+	font-size: 100px;
+}
+
+p {
+	font-family: 'Raleway', sans-serif;
+	font-size: 20px;
+}
+
+a {
+	color: #5C6A7C;
+}
+
+.btn-primary {
+	background-color: #435265;
+	border-color: #435265;
+}
+
+.btn-primary:active, .btn-primary:hover, .btn-primary:focus, .btn-primary:active:focus {
+	background-color: #5C6A7C;
+	border-color: #5C6A7C;
+}
