@@ -47,17 +47,17 @@ module.exports = function (app) {
     // });
   });
 
-  app.get("/mytools", function(req, res){
-   console.log("Information: ", req.body);
-   User.find({}).exec(function(err, doc){
-      if (err) {
-        console.log(err);
-      } else {
-        res.send(doc);
-      }
-   });
+  // app.get("/mytools", function(req, res){
+  //  console.log("Information: ", req.body);
+  //  User.find({}).exec(function(err, doc){
+  //     if (err) {
+  //       console.log(err);
+  //     } else {
+  //       res.send(doc);
+  //     }
+  //  });
 
-  });
+  // });
 
   // This is the route we will send POST requests to save user data to db.
   app.post("/submitUser", (req, res) => {
@@ -91,7 +91,11 @@ module.exports = function (app) {
               console.log("error saving user ", err);
             }
             else {
-              res.json(createdUser);
+              console.log("passport is in sign up for new group")
+              passport.authenticate('local')(req, res, function () {
+                res.json(createdUser);
+              });
+              
             }
           });
         }
@@ -123,7 +127,13 @@ module.exports = function (app) {
               console.log("error saving user ", err);
             }
             else {
-              res.send("Saved User");
+              console.log("passport in old group");
+              passport.authenticate('local')(req, res, function () {
+                console.log("inside old group, passport")
+                console.log(req.user)
+                res.send("Saved User");
+              });
+              
             }
           });
         }
@@ -137,11 +147,11 @@ module.exports = function (app) {
 
 
   // This is the route we will send POST requests for logging in.
-  app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
-    // console.log("inside check login");
-    // console.log(req.session.passport.user);
-    res.send(req.user);
-  });
+  // app.post("/checkLogin", passport.authenticate("local"), function(req, res, next) {
+  //   // console.log("inside check login");
+  //   // console.log(req.session.passport.user);
+  //   res.send(req.user);
+  // });
 
 
 
@@ -172,17 +182,17 @@ module.exports = function (app) {
     console.log("addTool BODY: ");
     console.log(req.body);
 
-    var user = "e201";
+    // var user = "e201";
 
     Tool.create({
       toolName: req.body.toolName,
       toolPrice: req.body.toolPrice,
       toolCondition: req.body.toolCondition,
       toolStatus: true,
-      toolHeldBy: user,
+      toolHeldBy: req.user.id,
       toolMaxDays: req.body.toolMaxDays,
       toolUrl: req.body.toolUrl,
-      toolOwner: user,
+      toolOwner: req.user.id,
       toolCreateDate: Date.now()
     }, function(err){
       if(err) {

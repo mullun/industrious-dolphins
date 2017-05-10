@@ -24,10 +24,12 @@ class MyTools extends Component {
 		axios.get("/getMyTools", {
 			// userName : "e201"
     }).then( (response) => {
+    	// line 28 was breaking the page for me, had to comment it out to get it to work
+		// console.log("tool name = " + response.data[0].toolName);
+    	this.setState({thisUsersTools: response.data})
     	console.log(response);
     	console.log("response.data.length = " + response.data.length);
-    	console.log("tool name = " + response.data[0].toolName);
-    	this.setState({thisUsersTools: response.data})
+    	
 
     	// for(var i=0; i<response.data.length; i++){
     	// 	$("<h4>" + response.data[i].toolName +"</h4>" ).appendTo(tempArticle);
@@ -60,7 +62,7 @@ class MyTools extends Component {
 							{this.props.useraddress}
 						</div>
 						<div id="userToolDiv" className="UsersTools">
-							<p>Your tools</p>
+							<h2>Your tools</h2>
 							{this.state.thisUsersTools.map(function(tool) {
 								return(
 								<div key={tool._id} className="toolEntry">
