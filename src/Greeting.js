@@ -121,7 +121,7 @@ class Greeting extends Component {
         groupName: groupNameSelected,
         groupNew: newGroup
       })
-      .then(this.setState({showModal: false}));
+      .then( );
       // window.location.href = 'http://localhost:3000/getMyTools'
       // hard coded to go to home page (julie: i changed it to my tools)
   }
@@ -142,7 +142,7 @@ class Greeting extends Component {
 	  		password: this.state.password
 	  	}).then(
         this.setState({isLoggedIn: true})
-        .then(this.setState({showModal: false}))
+      ).then(window.location.href = 'http://localhost:3000/getMyTools')
 
 	    console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
   	}
