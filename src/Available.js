@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import "./Available.css";
 import axios from 'axios';
+import Unavailable from "./Unavailable";
 
 import { 
 	ListGroup,
@@ -17,35 +18,30 @@ class Available extends Component {
 
 		this.state= {
 			availableTools: [],
-			toolName: [],
-			showModal: false,
-			currentToolName: '',
-			currentToolOwner: '',
-			currentToolDays: '',
-			currentToolPrice: '',
-			currentToolCondition: ''
+			unavailableTools: [],
+			update: false
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
 		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 		this.getAvailable = this.getAvailable.bind(this);
+		this.getUnavailable = this.getUnavailable.bind(this);
 		this.borrowTool = this.borrowTool.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 	}	
 
 	componentDidMount () {
 		this.getAvailable();
+		this.getUnavailable();
 	}
 
 	getAvailable () {
 		var available = [];
-		var toolName = [];
 
 		axios.get("/getTools", {}).then((response)=>{
 			for(var i=0; i<response.data.length; i++){
 				if(response.data[i].toolStatus){
 					available.push(response.data[i]);
-					toolName.push(<ListGroupItem onClick={this.currentTool} value={response.data[i].toolName} className="available" id={i} key={i}>{response.data[i].toolName}</ListGroupItem>);
 				}
 			}
 
@@ -56,9 +52,33 @@ class Available extends Component {
 	
 	}
 
+	getUnavailable () {
+		var unavailable = [];
+
+		axios.get("/getTools", {}).then((response)=>{
+			//console.log(response);
+			for(var i=0; i<response.data.length; i++){
+				if(!response.data[i].toolStatus){
+					unavailable.push(response.data[i]);
+				}
+			}
+			console.log("getUnavailable result: " +JSON.stringify(unavailable));
+			this.setState({ unavailableTools: unavailable });
+			console.log(this.state.unavailableTools);
+		});	
+	}	
+
 	componentDidUpdate (prevState, prevProps) {
 
-			// this.getAvailable();
+		// if(this.state !== this.prevState){
+		// 	this.getAvailable();
+		// 	this.getUnavailable();
+		// }
+		if(this.state.update){
+			this.getAvailable();
+			this.getUnavailable();
+			this.setState({ update: false });
+		}
 
 	}
 
@@ -69,7 +89,7 @@ class Available extends Component {
 		var toolToBorrow = tools[i];
 
 		this.borrowTool(toolToBorrow);
-		this.getAvailable();		
+		this.setState({ update: true });
 	}
 
 	borrowTool (tool) {
@@ -82,49 +102,38 @@ class Available extends Component {
 			})
 
 	}
-
-	currentTool(event) {
-    	this.setState({currentToolName: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolOwner: this.state.availableTools[event.target.id].toolOwner});
-    	this.setState({currentToolDays: this.state.availableTools[event.target.id].toolMaxDays});
-    	this.setState({currentToolPrice: this.state.availableTools[event.target.id].toolPrice});
-    	this.setState({currentToolCondition: this.state.availableTools[event.target.id].toolCondition});
-    	this.setState({showModal: true});
-  	}
-
-	close() {
-    	this.setState({showModal: false});
-  	}
  
 	render(){
 		return(
-			<div className="available container col-md-6">
-				<h2>Available Tool Component</h2>
-				<div className="thumbnails">
-					{this.state.availableTools.map(function(search, i){
-						return (
-								<div className="col-md-4">
-									<div className="thumbnail">
-										<img src={search.toolUrl} className="img-responsive" />
-										<div className="caption">
-											<h3>{search.toolName}</h3>
-											<p>Owner: {search.toolOwner}</p>
-											<p>Condition: {search.toolCondition}</p>
-											<button
-												className="btn"
-												value={i}
-												onClick= {() => this.handleClick(i)}
-											>
-												Borrow
-											</button>	
-										</div>		
+			<section>
+				<div className="available container col-md-6">
+					<h2>Available Tool Component</h2>
+					<div className="thumbnails">
+						{this.state.availableTools.map(function(search, i){
+							return (
+									<div className="col-md-4">
+										<div className="thumbnail">
+											<img src={search.toolUrl} className="img-responsive" />
+											<div className="caption">
+												<h3>{search.toolName}</h3>
+												<p>Owner: {search.toolOwner}</p>
+												<p>Condition: {search.toolCondition}</p>
+												<button
+													className="btn"
+													value={i}
+													onClick= {() => this.handleClick(i)}
+												>
+													Borrow
+												</button>	
+											</div>		
+										</div>
 									</div>
-								</div>
-							)
-					}, this)}
+								)
+						}, this)}
+					</div>
 				</div>
-
-			</div>
+				<Unavailable unavailableTools={this.state.unavailableTools} />
+			</section>	
 		);
 	}
 }

@@ -8,38 +8,23 @@ class Unavailable extends Component {
 		super(props);
 
 		this.state= {
-			unavailableTools: []
+			unavailableTools: this.props.unavailableTools
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
-		this.getUnavailable = this.getUnavailable.bind(this);
 	}
 
 	componentDidMount () {
-		this.getUnavailable();
-	}
-
-	componentDidUpdate (prevState, prevProps) {
-		// this.getUnavailable();
-	}
-
-	getUnavailable () {
-		var unavailable = [];
-
-		axios.get("/getTools", {}).then((response)=>{
-			//console.log(response);
-			for(var i=0; i<response.data.length; i++){
-				if(!response.data[i].toolStatus){
-					unavailable.push(response.data[i]);
-				}
-			}
-			console.log("getUnavailable result: " +JSON.stringify(unavailable));
-			this.setState({ unavailableTools: unavailable });
-			console.log(this.state.unavailableTools);
-		});
-
 		
-	}	
+	}
+
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.unavailableTools !== this.state.unavailableTools){
+			this.setState({ unavailableTools: nextProps.unavailableTools });
+		}
+	}
+
+	
 	render(){
 		return(
 			<div className="unavailable container col-md-6">
