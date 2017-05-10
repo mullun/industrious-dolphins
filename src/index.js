@@ -57,8 +57,6 @@ ReactDOM.render(
 			        <li><NavLink activeClassName="activeNav" to="/borrowtool">Borrow a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/returntool">Return a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/replacetool">Replace a Tool</NavLink></li>
-			        <li><NavLink activeClassName="activeNav" to="/submitUser">Sign Up</NavLink></li>
-			        <li><NavLink activeClassName="activeNav" to="/createGroup">Create Group</NavLink></li>
 			      </ul>
 			    </div>
 			</div>
