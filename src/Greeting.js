@@ -8,7 +8,7 @@ import {
     Tabs,
     Tab,
     FormControl,
-    Alert
+    ButtonToolbar
 } from 'react-bootstrap/lib/';
 
 class Greeting extends Component {
@@ -26,7 +26,6 @@ class Greeting extends Component {
         userLogged: '',
         isLoggedIn: false,
         showModal: false,
-        alertVisible: false,
 
         // Sign up states
         emailRecd: '', 
@@ -178,8 +177,11 @@ class Greeting extends Component {
                                         placeholder="Password"
                                         required
                                         /><br/>
-
-                                        <Button type="submit" bsStyle="primary">Sign In</Button>
+                                        
+                                        <ButtonToolbar>
+                                            <Button type="submit" bsStyle="primary">Sign In</Button>
+                                            <Button onClick={this.close}>Cancel</Button>
+                                        </ButtonToolbar>
                                     </form>
                                 </Modal.Body>
                             </Tab>
@@ -239,16 +241,14 @@ class Greeting extends Component {
                                         <p>or</p>
 
                                         <FormControl value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Create a New Group" /><hr/>
-                                    
-                                        <Button type="submit" bsStyle="primary" className="buttonClass">Sign Up</Button>
+                                        <ButtonToolbar>
+                                            <Button type="submit" bsStyle="primary" className="buttonClass">Sign Up</Button>
+                                            <Button onClick={this.close}>Cancel</Button>
+                                        </ButtonToolbar>
                                     </form>
                                 </Modal.Body>
                             </Tab>
                         </Tabs>
-
-                        <Modal.Footer>
-                        <Button onClick={this.close}>Close</Button>
-                        </Modal.Footer>
                     </Modal>
                 </div>
             </div>
