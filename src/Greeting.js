@@ -56,6 +56,7 @@ class Greeting extends Component {
         console.log(e.target.value)
     }
 
+
     submitUserDetails(event) {
         
         console.log("Submit button clicked to sign up");
@@ -97,14 +98,15 @@ class Greeting extends Component {
         this.setState(newState);
     }
 
+
     handleSubmit(event) {
         event.preventDefault();
        
-        this.setState({alertVisible: false});
-        axios.post("/checkLogin", {
-            email: this.state.email,
-            password: this.state.password
-        }).then(this.setState({isLoggedIn: true}))
+    	// console.log("login button clicked!")
+	  	axios.post("/checkLogin", {
+	  		email: this.state.email,
+	  		password: this.state.password
+	  	}).then(this.setState({isLoggedIn: true}))
         .then(this.setState({showModal: false}))
         
         console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
