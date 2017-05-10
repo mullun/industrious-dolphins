@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import "./ReturnTool.css";
 
 class ReturnTool extends Component {
@@ -12,13 +13,14 @@ class ReturnTool extends Component {
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 		this.getReturnable = this.getReturnable.bind(this);
 		this.returnTool = this.returnTool.bind(this);
 		this.handleClick = this.handleClick.bind(this);
 	}
 
 	componentDidMount () {
-		
+		this.getReturnable();
 	}
 
 	componentDidUpdate (prevState, prevProps) {
@@ -31,12 +33,22 @@ class ReturnTool extends Component {
 	}
 
 	getReturnable () {
+		var returnable = [];
 
+		axios.get("/returnableTools", {}).then((response)=>{
+
+			for(var i=0; i<response.data.length; i++){
+				returnable.push(response.data[i]);
+			}
+			console.log("getReturnable result: " +JSON.stringify(returnable));
+			this.setState({ returnableTools: returnable });
+			console.log(this.state.returnableTools);			
+		});
 	}	
 
 	returnTool (tool) {
 
-		axios.post("returnTool", {id: tool._id})
+		axios.post("returnableTools", {id: tool._id})
 			.then(function(response){
 				console.log(response);
 			}).catch(function(err){
@@ -46,6 +58,12 @@ class ReturnTool extends Component {
 	}
 
 	handleClick (i) {
+
+		var tools = this.state.returnableTools;
+		var toolToReturn = tools[i];
+		this.returnTool(toolToReturn);
+		this.setState({ update: true });
+
 
 	}
 
