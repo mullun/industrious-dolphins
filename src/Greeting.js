@@ -141,7 +141,7 @@ class Greeting extends Component {
 	  		email: this.state.email,
 	  		password: this.state.password
 	  	}).then(
-        this.setState({isLoggedIn: true})
+        this.setState({isLoggedIn: true}))
         .then(this.setState({showModal: false}))
 
 	    console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
