@@ -121,7 +121,7 @@ class Greeting extends Component {
         groupName: groupNameSelected,
         groupNew: newGroup
       })
-      .then(this.setState({showModal: false}));
+      .then( );
       // window.location.href = 'http://localhost:3000/getMyTools'
       // hard coded to go to home page (julie: i changed it to my tools)
   }
@@ -140,8 +140,7 @@ class Greeting extends Component {
 	  	axios.post("/checkLogin", {
 	  		email: this.state.email,
 	  		password: this.state.password
-	  	}).then(
-        this.setState({isLoggedIn: true}))
+	  	}).then(this.setState({isLoggedIn: true}))
         .then(this.setState({showModal: false}))
 
 	    console.log('Email: ' + this.state.email + ' and Password: ' + this.state.password);
