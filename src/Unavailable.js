@@ -12,10 +12,7 @@ class Unavailable extends Component {
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
-	}
-
-	componentDidMount () {
-		
+		this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
 	}
 
 	componentWillReceiveProps (nextProps) {
