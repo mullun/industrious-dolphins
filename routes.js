@@ -247,7 +247,10 @@ module.exports = function (app) {
 
   app.post("/borrowTool", function(req, res){
     var id = req.body.id;
-    var user = req.params.id;
+    var user = req.user.id;
+    console.log("User");
+    console.log(user);
+    console.log("Tool ID " +id);
 
     Tool.findOneAndUpdate({
       _id: id

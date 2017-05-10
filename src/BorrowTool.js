@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import "./BorrowTool.css";
 import Available from "./Available";
-import Unavailable from "./Unavailable";
+
 
 class BorrowTool extends Component {
 	render(){
@@ -9,7 +9,6 @@ class BorrowTool extends Component {
 			<div className="BorrowTool">
 				<h2>BorrowTool Page</h2>
 				<Available />
-				<Unavailable />
 			</div>
 			);
 	}
