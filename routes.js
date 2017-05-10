@@ -179,10 +179,10 @@ module.exports = function (app) {
       toolPrice: req.body.toolPrice,
       toolCondition: req.body.toolCondition,
       toolStatus: true,
-      toolHeldBy: req.user.id,
+      toolHeldBy: user,
       toolMaxDays: req.body.toolMaxDays,
       toolUrl: req.body.toolUrl,
-      toolOwner: req.user.id,
+      toolOwner: user,
       toolCreateDate: Date.now()
     }, function(err){
       if(err) {
@@ -226,7 +226,7 @@ module.exports = function (app) {
   //   console.log("this is app.get for /checkLogin");
   // });
   // This is the route we will send GET list of groups in the Data Base.
-  app.post("/getMyTools", function(req, res) {
+  app.get("/getMyTools", function(req, res) {
     console.log("got into getMytools GET in Server");
     // We'll use Date.now() to always get the current date time
     console.log(req.user.id);
@@ -241,6 +241,27 @@ module.exports = function (app) {
         console.log("sending tools");
         console.log(tools);
         res.json(tools);
+      }
+    });
+  });
+
+  app.post("/borrowTool", function(req, res){
+    var id = req.body.id;
+    var user = req.user.id;
+    console.log("User");
+    console.log(user);
+    console.log("Tool ID " +id);
+
+    Tool.findOneAndUpdate({
+      _id: id
+    }, { $set: {
+      toolHeldBy: user,
+      toolStatus: false
+    }}, function(err, doc){
+      if(err){
+        console.log(err);
+      } else {
+        console.log(doc);
       }
     });
   });

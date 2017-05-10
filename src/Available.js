@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 //import "./Available.css";
 import axios from 'axios';
+import Unavailable from "./Unavailable";
 
 import { 
 	ListGroup,
@@ -17,81 +18,122 @@ class Available extends Component {
 
 		this.state= {
 			availableTools: [],
-			toolName: [],
-			showModal: false,
-			currentToolName: '',
-			currentToolOwner: '',
-			currentToolDays: '',
-			currentToolPrice: '',
-			currentToolCondition: ''
+			unavailableTools: [],
+			update: false
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
+		this.componentDidUpdate = this.componentDidUpdate.bind(this);
 		this.getAvailable = this.getAvailable.bind(this);
-		this.currentTool = this.currentTool.bind(this);
-	    this.close = this.close.bind(this);	
-	}
+		this.getUnavailable = this.getUnavailable.bind(this);
+		this.borrowTool = this.borrowTool.bind(this);
+		this.handleClick = this.handleClick.bind(this);
+	}	
 
 	componentDidMount () {
 		this.getAvailable();
+		this.getUnavailable();
 	}
 
 	getAvailable () {
 		var available = [];
-		var toolName = [];
 
 		axios.get("/getTools", {}).then((response)=>{
 			for(var i=0; i<response.data.length; i++){
 				if(response.data[i].toolStatus){
 					available.push(response.data[i]);
-					toolName.push(<ListGroupItem onClick={this.currentTool} value={response.data[i].toolName} className="available" id={i} key={i}>{response.data[i].toolName}</ListGroupItem>);
 				}
 			}
 
 			console.log("getAvailable result: " +JSON.stringify(available));
 			this.setState({ availableTools: available });
-			this.setState({ toolName: toolName })
-		});	
+			console.log(this.state.availableTools);
+		});
+	
 	}
 
-	currentTool(event) {
-    	this.setState({currentToolName: this.state.availableTools[event.target.id].toolName});
-    	this.setState({currentToolOwner: this.state.availableTools[event.target.id].toolOwner});
-    	this.setState({currentToolDays: this.state.availableTools[event.target.id].toolMaxDays});
-    	this.setState({currentToolPrice: this.state.availableTools[event.target.id].toolPrice});
-    	this.setState({currentToolCondition: this.state.availableTools[event.target.id].toolCondition});
-    	this.setState({showModal: true});
-  	}
+	getUnavailable () {
+		var unavailable = [];
 
-	close() {
-    	this.setState({showModal: false});
-  	}
+		axios.get("/getTools", {}).then((response)=>{
+			//console.log(response);
+			for(var i=0; i<response.data.length; i++){
+				if(!response.data[i].toolStatus){
+					unavailable.push(response.data[i]);
+				}
+			}
+			console.log("getUnavailable result: " +JSON.stringify(unavailable));
+			this.setState({ unavailableTools: unavailable });
+			console.log(this.state.unavailableTools);
+		});	
+	}	
+
+	componentDidUpdate (prevState, prevProps) {
+
+		// if(this.state !== this.prevState){
+		// 	this.getAvailable();
+		// 	this.getUnavailable();
+		// }
+		if(this.state.update){
+			this.getAvailable();
+			this.getUnavailable();
+			this.setState({ update: false });
+		}
+
+	}
+
+	handleClick (i) {
+
+		var tools = this.state.availableTools;
+
+		var toolToBorrow = tools[i];
+
+		this.borrowTool(toolToBorrow);
+		this.setState({ update: true });
+	}
+
+	borrowTool (tool) {
+
+		axios.post("/borrowTool", {id: tool._id})
+			.then(function(response){
+				console.log(response);
+			}).catch(function(err){
+				console.log(err);
+			})
+
+	}
  
 	render(){
 		return(
-			<div className="Available">
-				<h2>Available Tools</h2>
-				<ListGroup>
-					{this.state.toolName}
-				</ListGroup>
-
-				<Modal show={this.state.showModal} onHide={this.close}>
-					<Modal.Header>
-			        	<Modal.Title>{this.state.currentToolName}</Modal.Title>
-			      	</Modal.Header>
-					<Modal.Body>
-						    <h3>Owner: {this.state.currentToolOwner}</h3>
-						    <h3>Price: {this.state.currentToolPrice}</h3>
-						    <h3>Condition: {this.state.currentToolCondition}</h3>
-						    <h3>Max # of Days Rented: {this.state.currentToolDays}</h3>
-					</Modal.Body>
-
-					<Modal.Footer>
-						<Button bsStyle="primary" onClick={this.close}>Borrow</Button>
-						<Button bsStyle="danger" onClick={this.close}>Close</Button>
-					</Modal.Footer>
-				</Modal>
-			</div>
+			<section>
+				<div className="available container col-md-6">
+					<h2>Available Tool Component</h2>
+					<div className="thumbnails">
+						{this.state.availableTools.map(function(search, i){
+							return (
+									<div className="col-md-4">
+										<div className="thumbnail">
+											<img src={search.toolUrl} className="img-responsive" />
+											<div className="caption">
+												<h3>{search.toolName}</h3>
+												<p>Owner: {search.toolOwner}</p>
+												<p>Condition: {search.toolCondition}</p>
+												<button
+													className="btn"
+													value={i}
+													onClick= {() => this.handleClick(i)}
+												>
+													Borrow
+												</button>	
+											</div>		
+										</div>
+									</div>
+								)
+						}, this)}
+					</div>
+				</div>
+				<Unavailable unavailableTools={this.state.unavailableTools} />
+			</section>	
 		);
 	}
 }

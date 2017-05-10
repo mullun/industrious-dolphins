@@ -8,38 +8,43 @@ class Unavailable extends Component {
 		super(props);
 
 		this.state= {
-			unavailableTools: []
+			unavailableTools: this.props.unavailableTools
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
-		this.getUnavailable = this.getUnavailable.bind(this);
 	}
 
 	componentDidMount () {
-		this.getUnavailable();
+		
 	}
 
-	getUnavailable () {
-		var unavailable = [];
+	componentWillReceiveProps (nextProps) {
+		if(nextProps.unavailableTools !== this.state.unavailableTools){
+			this.setState({ unavailableTools: nextProps.unavailableTools });
+		}
+	}
 
-		axios.get("/getTools", {}).then((response)=>{
-			//console.log(response);
-			for(var i=0; i<response.data.length; i++){
-				if(!response.data[i].toolStatus){
-					unavailable.push(response.data[i]);
-				}
-			}
-			console.log("getUnavailable result: " +JSON.stringify(unavailable));
-			this.setState({ unavailableTools: unavailable });
-			console.log(this.state.unavailableTools);
-		});
-
-		
-	}	
+	
 	render(){
 		return(
-			<div className="Unavailable">
+			<div className="unavailable container col-md-6">
 				<h2>Unavailable Tool Component</h2>
+					<div className="thumbnails">
+						{this.state.unavailableTools.map(function(search, i){
+							return (
+								<div className="col-md-4">
+									<div className="thumbnail">
+										<img src={search.toolUrl} className="img-responsive" />
+										<div className="caption">
+											<h3>{search.toolName}</h3>
+											<p>Owner: {search.toolOwner}</p>
+											<p>Condition: {search.toolCondition}</p>
+										</div>		
+									</div>
+								</div>
+								)
+						}, this)}
+					</div>				
 			</div>
 			);
 	}
