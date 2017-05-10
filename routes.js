@@ -226,7 +226,7 @@ module.exports = function (app) {
   //   console.log("this is app.get for /checkLogin");
   // });
   // This is the route we will send GET list of groups in the Data Base.
-  app.post("/getMyTools", function(req, res) {
+  app.get("/getMyTools", function(req, res) {
     console.log("got into getMytools GET in Server");
     // We'll use Date.now() to always get the current date time
     console.log(req.user.id);
