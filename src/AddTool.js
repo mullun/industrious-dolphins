@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import "./AddTool.css";
 import {
 	Button
 } from 'react-bootstrap/lib/';
@@ -84,7 +83,7 @@ class AddTool extends Component {
 	render(){
 		
 		return(
-			<div className="AddTool container">
+			<div className="AddTool container overlay">
 				<h1 className="white">Add A Tool</h1>
 
 				<form onSubmit={this.handleSubmit}>
@@ -141,7 +140,6 @@ class AddTool extends Component {
 						/>	
 						<br/>
 						<Button type="submit" bsSize="large" bsStyle="primary">Add Tool</Button>
-						{/*<button className="btn">Submit</button>*/}
 					</div>
 				</form>
 

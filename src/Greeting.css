@@ -3,14 +3,15 @@ body, html {
 	background-size: cover;	
 	background-position:center;
 	background-attachment: fixed;
-	height:100%;
+	/*height:100%;*/
 	text-align:center;
 	font-family: 'Roboto Condensed', sans-serif;
 }
 
-/*#overlay {
-	 background: rgba(70, 72, 82, 0.4)
-}*/
+.overlay {
+	 background: rgba(0, 2, 2, 0.4);
+	 height:auto;
+}
 
 .Mission {
 	position:absolute;
@@ -46,6 +47,15 @@ label.black {
 	margin-right: auto;
 }
 
+/*Modal*/
+.left {
+	text-align: left;
+}
+
+.list-group-item {
+	border: none;
+	font-size: 15px;
+}
 
 /*Text*/
 .white, h2 {

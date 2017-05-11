@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-//import "./Available.css";
 import axios from 'axios';
 import Unavailable from "./Unavailable";
 
 import { 
-	ListGroup,
-	ListGroupItem,
 	Modal,
-	Button
+	Button,
+	ButtonToolbar,
+	ListGroup,
+	ListGroupItem
 } from 'react-bootstrap/lib/';
 
 
@@ -19,7 +19,14 @@ class Available extends Component {
 		this.state= {
 			availableTools: [],
 			unavailableTools: [],
-			update: false
+			update: false,
+			showModal: false,
+			currentTool: {
+				toolCondition: '',
+				toolMaxDays: '',
+				toolName: '',
+				toolPrice: ''
+			}
 		};
 
 		this.componentDidMount = this.componentDidMount.bind(this);
@@ -28,6 +35,8 @@ class Available extends Component {
 		this.getUnavailable = this.getUnavailable.bind(this);
 		this.borrowTool = this.borrowTool.bind(this);
 		this.handleClick = this.handleClick.bind(this);
+		this.open = this.open.bind(this);
+    	this.close = this.close.bind(this);
 	}	
 
 	componentDidMount () {
@@ -98,12 +107,29 @@ class Available extends Component {
 			})
 
 	}
+
+	open(event) {
+
+		var value = event.target.value;
+		var currentToolObj = this.state.availableTools[value];
+		this.setState({toolCondition: currentToolObj.toolCondition});
+		this.setState({toolMaxDays: currentToolObj.toolMaxDays});
+		this.setState({toolName: currentToolObj.toolName});
+		this.setState({toolPrice: currentToolObj.toolPrice});
+
+        this.setState({showModal: true});
+    }
+
+    close() {
+        this.setState({showModal: false});
+    }
+
  
 	render(){
 		return(
 			<section>
-				<div className="available container col-md-6">
-					<h2>Available Tool Component</h2>
+				<div className="available container col-md-12">
+					<h2>Tools Available for Rent</h2>
 					<div className="thumbnails">
 						{this.state.availableTools.map(function(search, i){
 							return (
@@ -113,16 +139,39 @@ class Available extends Component {
 											<div className="caption">
 												<h3>{search.toolName}</h3>
 												<p>Owner: {search.toolOwner}</p>
-												<p>Condition: {search.toolCondition}</p>
-												<button
-													className="btn"
-													value={i}
-													onClick= {() => this.handleClick(i)}
-												>
-													Borrow
-												</button>	
+												{/*<p>Condition: {search.toolCondition}</p>*/}
+												<ButtonToolbar>
+													<Button
+														bsStyle="primary"
+														value={i}
+														onClick= {() => this.handleClick(i)}
+													>
+														Borrow
+													</Button>	
+													<Button
+														value={i}
+														onClick={this.open}
+													>
+														More Info
+													</Button>
+												</ButtonToolbar>
 											</div>		
 										</div>
+										<Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-sm">
+											<Modal.Header>
+												<h2 className="black">{this.state.toolName}</h2>
+											</Modal.Header>
+											<Modal.Body>
+												<ListGroup className="left">
+													<ListGroupItem>Condition <br/>
+														&emsp; {this.state.toolCondition}</ListGroupItem>
+												    <ListGroupItem>Damage/Lost Price <br/>
+												    	&emsp; ${this.state.toolPrice}</ListGroupItem>
+												    <ListGroupItem>Max # of Days To Rent <br/>
+												    	&emsp; {this.state.toolMaxDays}</ListGroupItem>
+												 </ListGroup>
+				                            </Modal.Body>
+										</Modal>
 									</div>
 								)
 						}, this)}

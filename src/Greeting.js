@@ -234,11 +234,11 @@ class Greeting extends Component {
                                     required
                                     /><hr/>
 
-                                    <label className="black"for="groupSelect">Join an Existing Group</label>
+                                    <label className="black" for="groupSelect">Join an Existing Group</label>
                                     <div className="form-group" id="groupSelect"></div>
                                     <p>or</p>
 
-                                    <label>Create a New Group</label>
+                                    <label className="black">Create a New Group</label>
                                     <FormControl value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="" /><hr/>
 
                                     <ButtonToolbar>
