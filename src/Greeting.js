@@ -55,7 +55,6 @@ class Greeting extends Component {
         console.log(e.target.value)
     }
 
-
     submitUserDetails(event) {
         
         console.log("Submit button clicked to sign up");
@@ -97,11 +96,9 @@ class Greeting extends Component {
         this.setState(newState);
     }
 
-
     handleSubmit(event) {
         event.preventDefault();
        
-    	// console.log("login button clicked!")
 	  	axios.post("/checkLogin", {
 	  		email: this.state.email,
 	  		password: this.state.password
@@ -121,7 +118,7 @@ class Greeting extends Component {
         // get list of group names in the database to show the user to choose
         var newArray = this.state.arrayOfGroups;
         var s = $('<select class="form-control" id="dropDown">');
-        $('<option />', { value: -1, text: "Select an Existing Group" }).appendTo(s);
+        $('<option />', { value: -1, text: "- Select -" }).appendTo(s);
         axios.get("/getGroups", {})
         .then(function(response){
             for (var i=0; i < response.data.length; i++) {
@@ -139,118 +136,120 @@ class Greeting extends Component {
         var groupNameEntered;
 
         return(
-// <h1>Need a tool but don't want to buy it? Borrow it from a friend!</h1>
-            <div className="container">
-                <div className="Mission">
-                    <h1 className="white">ToolShare</h1>
-                    <p className="white">The "Airbnb" for tools. Why buy when you can share?</p>
+            <div className="Mission container">
+                <h1 className="white">ToolShare</h1>
+                <p className="white">Why buy when you can share?</p>
 
-                    <Button
-                        bsStyle="primary"
-                        bsSize="large"
-                        onClick={this.open}
-                    >
-                    Sign in or Sign up now!
-                    </Button>
+                <Button
+                    bsStyle="primary"
+                    bsSize="large"
+                    onClick={this.open}
+                >
+                Sign in or Sign up now!
+                </Button>
 
-                    <Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-sm">
-                        <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
-                            <Tab eventKey={1} title="Sign In">
-                                <Modal.Body>
-                                    <h2 className="black">Welcome back!</h2>
+                <Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-sm">
+                    <Tabs defaultActiveKey={1} id="uncontrolled-tab-example">
+                        <Tab eventKey={1} title="Sign In">
+                            <Modal.Body>
+                                <h2 className="black">Welcome back!</h2>
 
-                                    <form onSubmit={this.handleSubmit}>
-                                        <FormControl
-                                        type="text"
-                                        value={this.state.text}
-                                        id="email"
-                                        onChange={this.handleChange}
-                                        placeholder="E-mail"
-                                        required
-                                        /><br/>
+                                <form onSubmit={this.handleSubmit}>
+                                    <label className="black" for="email">E-mail</label>
+                                    <FormControl
+                                    type="text"
+                                    value={this.state.text}
+                                    id="email"
+                                    onChange={this.handleChange}
+                                    placeholder="email@email.com"
+                                    required
+                                    />
 
-                                        <FormControl
-                                        type="password"
-                                        value={this.state.text}
-                                        id="password"
-                                        onChange={this.handleChange}
-                                        placeholder="Password"
-                                        required
-                                        /><br/>
-                                        
-                                        <ButtonToolbar>
-                                            <Button type="submit" bsStyle="primary">Sign In</Button>
-                                            <Button onClick={this.close}>Cancel</Button>
-                                        </ButtonToolbar>
-                                    </form>
-                                </Modal.Body>
-                            </Tab>
-                            <Tab eventKey={2} title="Sign Up">
-                                <Modal.Body>
-                                    <h2 className="black">Join the club!</h2>
+                                    <label className="black"for="password">Password</label>
+                                    <FormControl
+                                    type="password"
+                                    value={this.state.text}
+                                    id="password"
+                                    onChange={this.handleChange}
+                                    required
+                                    /><br/>
+                                    
+                                    <ButtonToolbar>
+                                        <Button type="submit" bsStyle="primary">Sign In</Button>
+                                        <Button onClick={this.close}>Cancel</Button>
+                                    </ButtonToolbar>
+                                </form>
+                            </Modal.Body>
+                        </Tab>
+                        <Tab eventKey={2} title="Sign Up">
+                            <Modal.Body>
+                                <h2 className="black">Join the club!</h2>
 
-                                    {/* <form className="signUpTexts"> */}
+                                <form onSubmit={this.submitUserDetails}>
+                                    <label className="black"for="emailRecd">E-mail</label>
+                                    <FormControl
+                                    type="text"
+                                    value={this.state.text}
+                                    id="emailRecd"
+                                    onChange={this.handleChange}
+                                    placeholder="email@email.com"
+                                    required
+                                    />
 
-                                    <form onSubmit={this.submitUserDetails}>
-                                        <FormControl
-                                        type="text"
-                                        value={this.state.text}
-                                        id="emailRecd"
-                                        onChange={this.handleChange}
-                                        placeholder="E-mail"
-                                        required
-                                        /><br/>
+                                    <label className="black"for="passwordRecd">Password</label>
+                                    <FormControl
+                                    type="password"
+                                    value={this.state.text}
+                                    id="passwordRecd"
+                                    onChange={this.handleChange}
+                                    required
+                                    />
 
-                                        <FormControl
-                                        type="password"
-                                        value={this.state.text}
-                                        id="passwordRecd"
-                                        onChange={this.handleChange}
-                                        placeholder="Password"
-                                        required
-                                        /><br/>
+                                    <label className="black"for="confirmPasswordRecd">Confirm Password</label>
+                                    <FormControl
+                                    type="password"
+                                    value={this.state.text}
+                                    id="confirmPasswordRecd"
+                                    onChange={this.handleChange}
+                                    required
+                                    />
 
-                                        <FormControl
-                                        type="password"
-                                        value={this.state.text}
-                                        id="confirmPasswordRecd"
-                                        onChange={this.handleChange}
-                                        placeholder="Confirm Password"
-                                        required
-                                        /><br/>
+                                    <label className="black"for="firstNameRecd">First Name</label>
+                                    <FormControl
+                                    type="text"
+                                    value={this.state.text}
+                                    id="firstNameRecd"
+                                    onChange={this.handleChange}
+                                    placeholder="John"
+                                    required
+                                    />
 
-                                        <FormControl
-                                        type="text"
-                                        value={this.state.text}
-                                        id="firstNameRecd"
-                                        onChange={this.handleChange}
-                                        placeholder="First Name"
-                                        required
-                                        /><br/>
+                                    <label className="black"for="lastNameRecd">Last Name</label>
+                                    <FormControl
+                                    type="text"
+                                    value={this.state.text}
+                                    id="lastNameRecd"
+                                    onChange={this.handleChange}
+                                    placeholder="Smith"
+                                    required
+                                    /><hr/>
 
-                                        <FormControl
-                                        type="text"
-                                        value={this.state.text}
-                                        id="lastNameRecd"
-                                        onChange={this.handleChange}
-                                        placeholder="Last Name"
-                                        required
-                                        /><hr/>
+                                    <label className="black"for="groupSelect">Join an Existing Group</label>
+                                    <div className="form-group" id="groupSelect"></div>
+                                    <p>or</p>
 
-                                        <div className="form-group" id="groupSelect"></div>
-                                        <p>or</p>
+                                    <label>Create a New Group</label>
+                                    <FormControl value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="" /><hr/>
 
-                                        <FormControl value={groupNameEntered} onChange={this.handleGroupNameChange} placeholder="Create a New Group" /><hr/>
-                                        <ButtonToolbar>
-                                            <Button type="submit" bsStyle="primary" className="buttonClass">Sign Up</Button>
-                                            <Button onClick={this.close}>Cancel</Button>
-                                        </ButtonToolbar>
-                                    </form>
-                                </Modal.Body>
-                            </Tab>
-                        </Tabs>
-                    </Modal>
-                </div>
+                                    <ButtonToolbar>
+                                        <Button type="submit" bsStyle="primary" className="buttonClass">Sign Up</Button>
+                                        <Button onClick={this.close}>Cancel</Button>
+                                    </ButtonToolbar>
+                                </form>
+                            </Modal.Body>
+                        </Tab>
+                    </Tabs>
+                </Modal>
             </div>
         ); // end return
     }

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import "./AddTool.css";
+import {
+	Button
+} from 'react-bootstrap/lib/';
 
 import axios from 'axios';
 
@@ -82,16 +85,17 @@ class AddTool extends Component {
 		
 		return(
 			<div className="AddTool container">
-				<h2>Add A Tool</h2>
+				<h1 className="white">Add A Tool</h1>
+
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
 						<label for="toolNameInput">Tool</label>
 						<input 
 							type="text"
-							className="form-control"
 							id="toolNameInput"
+							className="form-control"
 							onChange={this.handleName}
-							placeholder="Tool Name"
+							placeholder="Lawn Mower"
 							value={this.state.toolName}
 							required
 						/>
@@ -101,7 +105,7 @@ class AddTool extends Component {
 							className="form-control"
 							id="toolPriceInput"
 							onChange={this.handlePrice}
-							placeholder="$$$"
+							placeholder="$200"
 							value={this.state.toolPrice}
 							required
 						/>	
@@ -111,17 +115,17 @@ class AddTool extends Component {
 							className="form-control"
 							id="toolConditionInput"
 							onChange={this.handleCondition}
-							placeholder="Lightly used"
+							placeholder="Lightly Used"
 							value={this.state.toolCondition}
 							required
 						/>	
-						<label for="toolMaxInput">Max Days To Lend</label>						
+						<label for="toolMaxInput">Max # of Days To Lend</label>						
 						<input 
 							type="text"
 							className="form-control"
 							id="toolMaxInput"
 							onChange={this.handleMaxDays}
-							placeholder="7 days"
+							placeholder="7"
 							value={this.state.toolMaxDays}
 							required
 						/>
@@ -131,11 +135,13 @@ class AddTool extends Component {
 							className="form-control"
 							id="toolUrlInput"
 							onChange={this.handleUrl}
-							placeholder="$$$"
+							placeholder="http://image.jpg"
 							value={this.state.toolUrl}
 							required
 						/>	
-						<button className="btn">Submit</button>																								
+						<br/>
+						<Button type="submit" bsSize="large" bsStyle="primary">Add Tool</Button>
+						{/*<button className="btn">Submit</button>*/}
 					</div>
 				</form>
 
