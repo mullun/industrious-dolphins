@@ -72,7 +72,7 @@ class MyTools extends Component {
 			// 		<h2>MyTools Page</h2>
 
 
-			<div className="UsersTools">
+			<div className="UsersTools container">
 
 
 						<div className="UserAddress">
