@@ -133,8 +133,8 @@ class Available extends Component {
 					<div className="thumbnails">
 						{this.state.availableTools.map(function(search, i){
 							return (
-									<div className="col-md-4" >
-										<div className="thumbnail" key={i}>
+									<div className="col-md-4">
+										<div className="thumbnail">
 											<img src={search.toolUrl} className="img-responsive" />
 											<div className="caption">
 												<h3>{search.toolName}</h3>
@@ -170,15 +170,9 @@ class Available extends Component {
 												    <ListGroupItem>Max # of Days To Rent <br/>
 												    	&emsp; {this.state.toolMaxDays}</ListGroupItem>
 												 </ListGroup>
-
-				                                <form onSubmit={this.handleSubmit}>
-				                                    
-				                                </form>
 				                            </Modal.Body>
 										</Modal>
 									</div>
-
-									
 								)
 						}, this)}
 					</div>
