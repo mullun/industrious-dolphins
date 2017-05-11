@@ -181,6 +181,8 @@ module.exports = function (app) {
   app.post("/submitTool", function(req, res){
     console.log("addTool BODY: ");
     console.log(req.body);
+    console.log("inside submit tool");
+    console.log(req.user)
 
     // var user = "e201";
 
@@ -192,7 +194,7 @@ module.exports = function (app) {
       toolHeldBy: req.user.id,
       toolMaxDays: req.body.toolMaxDays,
       toolUrl: req.body.toolUrl,
-      toolOwner: req.user.id,
+      toolOwner: req.user.firstName,
       toolCreateDate: Date.now()
     }, function(err){
       if(err) {

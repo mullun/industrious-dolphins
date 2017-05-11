@@ -23,8 +23,8 @@ class Unavailable extends Component {
 	
 	render(){
 		return(
-			<div className="unavailable container col-md-6">
-				<h2>Unavailable Tool Component</h2>
+			<div className="unavailable container col-md-12">
+				<h2>Rented Tools</h2>
 					<div className="thumbnails">
 						{this.state.unavailableTools.map(function(search, i){
 							return (
