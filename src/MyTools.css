@@ -8,3 +8,7 @@ img{
 	height: 160px;
 	width: 151px;
 }
+.toolEntry{
+	float: left;
+	padding: 10px;
+}
