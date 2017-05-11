@@ -6,7 +6,7 @@ import Available from "./Available";
 class BorrowTool extends Component {
 	render(){
 		return(
-			<div className="BorrowTool">
+			<div className="BorrowTool container">
 				<h2>BorrowTool Page</h2>
 				<Available />
 			</div>

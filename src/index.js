@@ -22,7 +22,6 @@ import CreateGroup from "./CreateGroup";
 
 import App from './App';
 import Greeting from './Greeting';
-import EnsureLoggedInContainer from './EnsureLoggedInContainer';
 
 // Modals
 import BorrowModal from "./BorrowModal";
@@ -38,9 +37,9 @@ ReactDOM.render(
 	
   <Router>
 
-    <div className="container">
+    <div>
 		<nav className="navbar navbar-default">
-			<div className="container-fluid">
+			<div className="container-fluid container">
 			    <div className="navbar-header">
 			      <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 			        <span className="sr-only">Toggle navigation</span>
@@ -51,12 +50,11 @@ ReactDOM.render(
 			      <a className="navbar-brand" href="/">Tool Share</a>
 			    </div>
 			    <div id="navbar" className="navbar-collapse collapse">
-			      <ul className="nav navbar-nav">
+			      <ul className="nav navbar-nav pull-right">
 			        <li><NavLink activeClassName="activeNav" to="/getMyTools">My Tools</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/addtool">Add a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/borrowtool">Borrow a Tool</NavLink></li>
 			        <li><NavLink activeClassName="activeNav" to="/returntool">Return a Tool</NavLink></li>
-			        <li><NavLink activeClassName="activeNav" to="/replacetool">Replace a Tool</NavLink></li>
 			      </ul>
 			    </div>
 			</div>
