@@ -9,7 +9,7 @@ body, html {
 }
 
 .overlay {
-	 background: rgba(0, 2, 2, 0.4);
+	 background: rgba(0, 2, 2, .8);
 	 height:auto;
 }
 
