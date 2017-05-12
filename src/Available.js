@@ -5,9 +5,10 @@ import Unavailable from "./Unavailable";
 import { 
 	Modal,
 	Button,
-	ButtonToolbar,
+	ButtonGroup,
 	ListGroup,
-	ListGroupItem
+	ListGroupItem,
+	Thumbnail
 } from 'react-bootstrap/lib/';
 
 
@@ -22,6 +23,8 @@ class Available extends Component {
 			update: false,
 			showModal: false,
 			currentTool: {
+				toolUrl: '',
+				toolOwnerName: '',
 				toolCondition: '',
 				toolMaxDays: '',
 				toolName: '',
@@ -113,6 +116,9 @@ class Available extends Component {
 
 		var value = event.target.value;
 		var currentToolObj = this.state.availableTools[value];
+		
+		this.setState({toolUrl: currentToolObj.toolUrl});
+		this.setState({toolOwnerName: currentToolObj.toolOwnerName});
 		this.setState({toolCondition: currentToolObj.toolCondition});
 		this.setState({toolMaxDays: currentToolObj.toolMaxDays});
 		this.setState({toolName: currentToolObj.toolName});
@@ -130,7 +136,7 @@ class Available extends Component {
 		return(
 			<section>
 				<div className="available container col-md-12">
-					<h2>Available Tools for Rent</h2>
+					<h2>Available Tools</h2>
 					<div className="thumbnails">
 						{this.state.availableTools.map(function(search, i){
 							return (
@@ -141,7 +147,7 @@ class Available extends Component {
 												<h3>{search.toolName}</h3>
 												<p>Owner: {search.toolOwnerName}</p>
 												{/*<p>Condition: {search.toolCondition}</p>*/}
-												<ButtonToolbar>
+												<ButtonGroup >
 													<Button
 														bsStyle="primary"
 														value={i}
@@ -155,29 +161,34 @@ class Available extends Component {
 													>
 														More Info
 													</Button>
-												</ButtonToolbar>
+												</ButtonGroup>
 											</div>		
-										</div>
-										<Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-sm">
-											<Modal.Header>
-												<h2 className="black">{this.state.toolName}</h2>
-											</Modal.Header>
-											<Modal.Body>
-												<ListGroup className="left">
-													<ListGroupItem>Condition <br/>
-														&emsp; {this.state.toolCondition}</ListGroupItem>
-												    <ListGroupItem>Damage/Lost Price <br/>
-												    	&emsp; ${this.state.toolPrice}</ListGroupItem>
-												    <ListGroupItem>Max # of Days To Rent <br/>
-												    	&emsp; {this.state.toolMaxDays}</ListGroupItem>
-												 </ListGroup>
-				                            </Modal.Body>
-										</Modal>
+										</div>									
 									</div>
 								)
 						}, this)}
 					</div>
 				</div>
+				<Modal show={this.state.showModal} onHide={this.close} bsSize="small" aria-labelledby="contained-modal-title-sm">
+					<Modal.Header>
+						<h2 className="black">{this.state.toolName}</h2>
+					</Modal.Header>
+					<Modal.Body>
+						<ListGroup className="left">
+							<ListGroupItem><Thumbnail src={this.state.toolUrl} /></ListGroupItem>
+							<ListGroupItem><u>Owner</u> <br/>
+								{this.state.toolOwnerName}</ListGroupItem>
+							<ListGroupItem><u>Condition</u> <br/>
+								{this.state.toolCondition}</ListGroupItem>
+						    <ListGroupItem><u>Damage/Lost Price</u> <br/>
+						    	${this.state.toolPrice}</ListGroupItem>
+						    <ListGroupItem><u>Max # of Days To Rent</u> <br/>
+						    	{this.state.toolMaxDays}</ListGroupItem>
+						</ListGroup>
+						<Button onClick={this.close}>Close</Button>
+                    </Modal.Body>
+				</Modal>
+
 				<Unavailable unavailableTools={this.state.unavailableTools} />
 			</section>	
 		);
