@@ -56,6 +56,7 @@ class Available extends Component {
 
 			console.log("getAvailable result: " +JSON.stringify(available));
 			this.setState({ availableTools: available });
+			console.log("this.state.availableTools: ")
 			console.log(this.state.availableTools);
 		});
 	
@@ -129,7 +130,7 @@ class Available extends Component {
 		return(
 			<section>
 				<div className="available container col-md-12">
-					<h2>Tools Available for Rent</h2>
+					<h2>Available Tools for Rent</h2>
 					<div className="thumbnails">
 						{this.state.availableTools.map(function(search, i){
 							return (
@@ -138,7 +139,7 @@ class Available extends Component {
 											<img src={search.toolUrl} className="img-responsive" />
 											<div className="caption">
 												<h3>{search.toolName}</h3>
-												<p>Owner: {search.toolOwner}</p>
+												<p>Owner: {search.toolOwnerName}</p>
 												{/*<p>Condition: {search.toolCondition}</p>*/}
 												<ButtonToolbar>
 													<Button
