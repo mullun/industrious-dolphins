@@ -27,8 +27,8 @@ var PORT = process.env.PORT || 8080;
 // var PORT = 8080;
 
 // ensure that public folder is the default for files
-app.use(express.static("./public"));
-
+//app.use(express.static("./public"));
+app.use(express.static(path.join(__dirname, 'build')));
 // Run Morgan for Logging middleware
 app.use(logger("dev"));
 app.use(bodyParser.json());
@@ -38,7 +38,12 @@ app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
 
 // MongoDB Configuration configuration
-mongoose.connect("mongodb://localhost/toolshare");
+if (process.env.MONGODB_URI){
+  mongoose.connect(process.env.MONGODB_URI);
+}else{
+  mongoose.connect("mongodb://localhost/toolshare");
+}
+
 var db = mongoose.connection;
 
 db.on("error", function(err) {
