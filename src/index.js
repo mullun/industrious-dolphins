@@ -70,6 +70,7 @@ ReactDOM.render(
 		        <Route path="/getMyTools" component={MyTools}></Route>
 		        <Route path="/returntool" component={ReturnTool}></Route>
 		        <Route path="/replacetool" component={ReplaceTool}></Route>
+
 		    
  		</Switch>
     </div>
