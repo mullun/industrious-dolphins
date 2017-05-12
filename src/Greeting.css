@@ -3,7 +3,7 @@ body, html {
 	background-size: cover;	
 	background-position:center;
 	background-attachment: fixed;
-	/*height:100%;*/
+	height:100%;
 	text-align:center;
 	font-family: 'Roboto Condensed', sans-serif;
 }
@@ -54,13 +54,17 @@ label.black {
 
 .list-group-item {
 	border: none;
-	font-size: 15px;
+	font-size: 18px;
 }
 
 /*Text*/
 .white, h2 {
 	color: white;
 	text-shadow: 2px 2px 3px rgba(0,0,0,0.9);
+}
+
+h2 {
+	font-size: 40px;
 }
 
 h2.black {

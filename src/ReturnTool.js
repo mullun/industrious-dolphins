@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import "./ReturnTool.css";
+import { 
+	Modal,
+	Button,
+	ButtonGroup,
+	ListGroup,
+	ListGroupItem,
+	Thumbnail
+} from 'react-bootstrap/lib/';
+// import "./ReturnTool.css";
 // import axios from "axios";
 
 class ReturnTool extends Component {
@@ -70,8 +78,8 @@ class ReturnTool extends Component {
 
 	render(){
 		return(
-			<div className="ReturnTool">
-				<h2>Return Tool Component</h2>
+			<div className="ReturnTool container overlay">
+				<h1 className="white">Return A Tool</h1> <br/>
 					<div className="thumbnails">
 						{this.state.returnableTools.map(function(search, i){
 							return (
@@ -80,15 +88,17 @@ class ReturnTool extends Component {
 											<img src={search.toolUrl} className="img-responsive" />
 											<div className="caption">
 												<h3>{search.toolName}</h3>
-												<p>Owner: {search.toolOwner}</p>
+												<p>Owner: {search.toolOwnerName}</p>
 												<p>Condition: {search.toolCondition}</p>
-												<button
-													className="btn"
-													value={i}
-													onClick= {() => this.handleClick(i)}
-												>
-													Return
-												</button>	
+												<ButtonGroup >
+													<Button
+														bsStyle="primary"
+														value={i}
+														onClick= {() => this.handleClick(i)}
+													>
+														Return
+													</Button>	
+												</ButtonGroup>
 											</div>		
 										</div>
 									</div>

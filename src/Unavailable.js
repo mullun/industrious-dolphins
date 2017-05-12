@@ -33,8 +33,8 @@ class Unavailable extends Component {
 										<img src={search.toolUrl} className="img-responsive" />
 										<div className="caption">
 											<h3>{search.toolName}</h3>
-											<p>Owner: {search.toolOwner}</p>
-											<p>Condition: {search.toolCondition}</p>
+											<p>Owner: {search.toolOwnerName}</p>
+											{/*<p>Condition: {search.toolCondition}</p>*/}
 										</div>		
 									</div>
 								</div>
