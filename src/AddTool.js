@@ -5,6 +5,8 @@ import {
 
 import axios from 'axios';
 
+import { browserHistory } from "react-router";
+
 class AddTool extends Component {
 
 	constructor(props) {
@@ -25,6 +27,20 @@ class AddTool extends Component {
 		this.handleMaxDays = this.handleMaxDays.bind(this);
 		this.handleUrl = this.handleUrl.bind(this);
 		this.addTool = this.addTool.bind(this);	
+	}
+
+	componentDidMount(){
+		console.log("browserHistory = ", browserHistory);
+		console.log("inside Component Did Mount Add tool");
+		axios.post("/isUserLoggedIn", {
+		})
+		.then ((response) => {
+			console.log("response to check user log in status = " + response.data);
+			if (!response.data) {
+				console.log("go back to home page");
+				window.location.href = 'http://localhost:3000/';
+			}
+		})
 	}
 
 	handleSubmit(event) {
@@ -88,7 +104,7 @@ class AddTool extends Component {
 
 				<form onSubmit={this.handleSubmit}>
 					<div className="form-group">
-						<label for="toolNameInput">Tool</label>
+						<label >Tool</label>
 						<input 
 							type="text"
 							id="toolNameInput"
@@ -98,7 +114,7 @@ class AddTool extends Component {
 							value={this.state.toolName}
 							required
 						/>
-						<label for="toolPriceInput">Cost To Replace</label>						
+						<label >Cost To Replace</label>						
 						<input 
 							type="text"
 							className="form-control"
@@ -108,7 +124,7 @@ class AddTool extends Component {
 							value={this.state.toolPrice}
 							required
 						/>	
-						<label for="toolConditionInput">Tool Condition</label>						
+						<label >Tool Condition</label>						
 						<input 
 							type="text"
 							className="form-control"
@@ -118,7 +134,7 @@ class AddTool extends Component {
 							value={this.state.toolCondition}
 							required
 						/>	
-						<label for="toolMaxInput">Max # of Days To Lend</label>						
+						<label >Max # of Days To Lend</label>						
 						<input 
 							type="text"
 							className="form-control"
@@ -128,7 +144,7 @@ class AddTool extends Component {
 							value={this.state.toolMaxDays}
 							required
 						/>
-						<label for="toolUrlInput">Image URL</label>						
+						<label >Image URL</label>						
 						<input 
 							type="text"
 							className="form-control"

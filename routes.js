@@ -33,18 +33,16 @@ module.exports = function (app) {
 
   // This is the route we will send GET requests to retrieve or to post data to db.
   // We will call this route the moment our page gets rendered
-  app.get("/api", function(req, res) {
-    // We will find all the records, sort it in descending order, then limit the records to 5
-    // History.find({}).sort([
-    //   ["date", "descending"]
-    // ]).limit(5).exec(function(err, doc) {
-    //   if (err) {
-    //     console.log(err);
-    //   }
-    //   else {
-    //     res.send(doc);
-    //   }
-    // });
+  app.post("/isUserLoggedIn", (req, res) => {
+    console.log("inside isUserLoggedIn in routes ");
+    if (req.user) {
+      console.log("user is logged in");
+      res.json(true);
+    } else {
+      console.log("no user ");
+      res.json(false);
+    }
+
   });
 
   // app.get("/mytools", function(req, res){
